@@ -6,8 +6,8 @@ import { FlowerModule } from './modules/flower/flower.module';
 import { ConfigModule } from '@nestjs/config';
 import { join } from 'path';
 import { AuthModule } from './modules/auth/auth.module';
-import { UserModule } from './modules/user/user.module';
-import { AuthModule } from './modules/auth/auth.module';
+import { PlantsModule } from './modules/plants/plants.module';
+import { UserModule } from './modules/users/user.module';
 
 @Module({
   imports: [
@@ -17,6 +17,7 @@ import { AuthModule } from './modules/auth/auth.module';
     FlowerModule,
     AuthModule,
     UserModule,
+    PlantsModule,
   ],
   controllers: [AppController],
   providers: [AppService],

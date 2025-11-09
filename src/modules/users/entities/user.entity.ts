@@ -8,9 +8,10 @@ import {
 } from 'typeorm';
 import { Exclude } from 'class-transformer';
 import { EntityEnums } from 'src/common/enums/entity-name.enum';
+import { PlantEntity } from 'src/modules/plants/entities/plant.entity';
 
 @Entity(EntityEnums.User)
-export class User {
+export class UserEntity {
   @PrimaryGeneratedColumn('increment')
   id: string;
 
@@ -32,4 +33,6 @@ export class User {
 
   @UpdateDateColumn()
   updatedAt: Date;
+  @OneToMany(() => PlantEntity, (plant) => plant.user)
+  plants: PlantEntity[];
 }
