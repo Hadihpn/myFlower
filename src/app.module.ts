@@ -8,6 +8,7 @@ import { join } from 'path';
 import { AuthModule } from './modules/auth/auth.module';
 import { PlantsModule } from './modules/plants/plants.module';
 import { UserModule } from './modules/users/user.module';
+import { SensorReadingsModule } from './modules/sensor-readings/sensor-readings.module';
 
 @Module({
   imports: [
@@ -18,6 +19,7 @@ import { UserModule } from './modules/users/user.module';
     AuthModule,
     UserModule,
     PlantsModule,
+    SensorReadingsModule,
   ],
   controllers: [AppController],
   providers: [AppService],

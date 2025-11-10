@@ -1,4 +1,5 @@
 import { EntityEnums } from 'src/common/enums/entity-name.enum';
+import { SensorReadingEntity } from 'src/modules/sensor-readings/entities/sensor-reading.entity';
 import { UserEntity } from 'src/modules/users/entities/user.entity';
 import {
   Entity,
@@ -50,4 +51,6 @@ export class PlantEntity {
 
   @Column()
   userId: string;
+  @OneToMany(() => SensorReadingEntity, (reading) => reading.plant)
+  sensorReadings: SensorReadingEntity[];
 }
