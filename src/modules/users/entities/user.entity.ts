@@ -13,7 +13,7 @@ import { PlantEntity } from 'src/modules/plants/entities/plant.entity';
 @Entity(EntityEnums.User)
 export class UserEntity {
   @PrimaryGeneratedColumn('increment')
-  id: string;
+  id: number;
 
   @Column({ unique: true })
   email: string;
