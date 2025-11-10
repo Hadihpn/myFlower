@@ -10,8 +10,8 @@ export class UserService {
   constructor(@InjectRepository(UserEntity) private userRepository:Repository<UserEntity>){}
 
 async create(userDto: Partial<UserEntity>): Promise<UserEntity> {
-  const {email,fullName,password,phoneNumber} = userDto
-    const user = this.userRepository.create({email,fullName,password,phoneNumber});
+  const {email,fullName,password,phone} = userDto
+    const user = this.userRepository.create({email,fullName,password,phone});
     return await this.userRepository.save(user);
   }
 

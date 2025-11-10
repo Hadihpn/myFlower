@@ -1,34 +1,36 @@
-import { Controller, Get, Post, Body, Patch, Param, Delete } from '@nestjs/common';
-import { AuthService } from './auth.service';
-import { CreateAuthDto } from './dto/create-auth.dto';
-import { UpdateAuthDto } from './dto/update-auth.dto';
+import { Body, Controller, Post } from '@nestjs/common';
+import {
+  CheckOtpDto,
+  SendOtpDto,
+  SendSupplierOtpDto,
+} from './dto/otp.dto';
+import { ApiConsumes, ApiTags } from '@nestjs/swagger';
+import { RegisterDto } from './dto/register.dto';
+import { FormType } from 'src/common/enums/form-type.enum';
 
 @Controller('auth')
+@ApiTags('Auth')
 export class AuthController {
   constructor(private readonly authService: AuthService) {}
 
-  @Post()
-  create(@Body() createAuthDto: CreateAuthDto) {
-    return this.authService.create(createAuthDto);
+  @Post('/register')
+  @ApiConsumes(FormType.UrlEncoded, FormType.JSON)
+  register(@Body() registerDto: RegisterDto) {
+    return this.authService.(otpDto);
   }
-
-  @Get()
-  findAll() {
-    return this.authService.findAll();
+  @Post('/check-otp')
+  @ApiConsumes(FormType.UrlEncoded, FormType.JSON)
+  checkOtp(@Body() otpDto: CheckOtpDto) {
+    return this.authService.checkOtp(otpDto);
   }
-
-  @Get(':id')
-  findOne(@Param('id') id: string) {
-    return this.authService.findOne(+id);
+  @Post('/send-supplier-otp')
+  @ApiConsumes(FormType.UrlEncoded, FormType.JSON)
+  sendSupplierOtp(@Body() otpDto: SendSupplierOtpDto) {
+    return this.authService.sendSupplierOtp(otpDto);
   }
-
-  @Patch(':id')
-  update(@Param('id') id: string, @Body() updateAuthDto: UpdateAuthDto) {
-    return this.authService.update(+id, updateAuthDto);
-  }
-
-  @Delete(':id')
-  remove(@Param('id') id: string) {
-    return this.authService.remove(+id);
+  @Post('/check-supplier-otp')
+  @ApiConsumes(FormType.UrlEncoded, FormType.JSON)
+  checkSupplierOtp(@Body() otpDto: CheckOtpDto) {
+    return this.authService.checkSupplierOtp(otpDto);
   }
 }
