@@ -18,6 +18,9 @@ async create(userDto: Partial<UserEntity>): Promise<UserEntity> {
   async findByEmail(email: string): Promise<UserEntity | null> {
     return await this.userRepository.findOne({ where: { email } });
   }
+  async findById(id: number): Promise<UserEntity | null> {
+    return await this.userRepository.findOneBy({id})
+  }
 
 
 
@@ -28,10 +31,7 @@ async create(userDto: Partial<UserEntity>): Promise<UserEntity> {
   findOne(id: number) {
     return `This action returns a #${id} user`;
   }
-  async findById(id: number) {
-    return await this.userRepository.findOneBy({id})
-  
-  }
+
 
   update(id: number, updateUserDto: UpdateUserDto) {
     return `This action updates a #${id} user`;
