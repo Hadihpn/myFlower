@@ -1,34 +1,72 @@
-import { Controller, Get, Post, Body, Patch, Param, Delete } from '@nestjs/common';
+import {
+  Controller,
+  Get,
+  Post,
+  Body,
+  Param,
+  Query,
+  Request,
+} from '@nestjs/common';
+import { ApiTags, ApiOperation, ApiBearerAuth } from '@nestjs/swagger';
 import { UserActionsService } from './user-actions.service';
 import { CreateUserActionDto } from './dto/create-user-action.dto';
-import { UpdateUserActionDto } from './dto/update-user-action.dto';
+import { UserAuth } from 'src/common/decorators/auth.decorator';
 
+@ApiTags('User Actions')
 @Controller('user-actions')
+@UserAuth()
+@ApiBearerAuth()
 export class UserActionsController {
-  constructor(private readonly userActionsService: UserActionsService) {}
+  constructor(private userActionsService: UserActionsService) {}
 
-  @Post()
-  create(@Body() createUserActionDto: CreateUserActionDto) {
-    return this.userActionsService.create(createUserActionDto);
+  @Post('plant/:plantId')
+  @ApiOperation({ summary: 'Record a care action for a plant' })
+  async create(
+    @Request() req,
+    @Param('plantId') plantId: string,
+    @Body() createUserActionDto: CreateUserActionDto,
+  ) {
+    return await this.userActionsService.create(
+      plantId,
+      req.user.id,
+      createUserActionDto,
+    );
   }
 
-  @Get()
-  findAll() {
-    return this.userActionsService.findAll();
+  @Get('plant/:plantId')
+  @ApiOperation({ summary: 'Get all actions for a plant' })
+  async getAllActions(@Request() req, @Param('plantId') plantId: string) {
+    return await this.userActionsService.getAllActionsForPlant(
+      plantId,
+      req.user.id,
+    );
   }
 
-  @Get(':id')
-  findOne(@Param('id') id: string) {
-    return this.userActionsService.findOne(+id);
+  @Get('plant/:plantId/recent')
+  @ApiOperation({ summary: 'Get recent actions for a plant' })
+  async getRecentActions(
+    @Request() req,
+    @Param('plantId') plantId: string,
+    @Query('days') days?: number,
+  ) {
+    return await this.userActionsService.getRecentActions(
+      plantId,
+      req.user.id,
+      days,
+    );
   }
 
-  @Patch(':id')
-  update(@Param('id') id: string, @Body() updateUserActionDto: UpdateUserActionDto) {
-    return this.userActionsService.update(+id, updateUserActionDto);
-  }
-
-  @Delete(':id')
-  remove(@Param('id') id: string) {
-    return this.userActionsService.remove(+id);
+  @Get('plant/:plantId/type/:actionType')
+  @ApiOperation({ summary: 'Get actions by type for a plant' })
+  async getActionsByType(
+    @Request() req,
+    @Param('plantId') plantId: string,
+    @Param('actionType') actionType: string,
+  ) {
+    return await this.userActionsService.getActionsByType(
+      plantId,
+      req.user.id,
+      actionType,
+    );
   }
 }

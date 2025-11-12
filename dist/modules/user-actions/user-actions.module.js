@@ -10,13 +10,19 @@ exports.UserActionsModule = void 0;
 const common_1 = require("@nestjs/common");
 const user_actions_service_1 = require("./user-actions.service");
 const user_actions_controller_1 = require("./user-actions.controller");
+const typeorm_1 = require("@nestjs/typeorm");
+const user_action_entity_1 = require("./entities/user-action.entity");
+const plant_entity_1 = require("../plants/entities/plant.entity");
+const plants_service_1 = require("../plants/plants.service");
+const auth_module_1 = require("../auth/auth.module");
 let UserActionsModule = class UserActionsModule {
 };
 exports.UserActionsModule = UserActionsModule;
 exports.UserActionsModule = UserActionsModule = __decorate([
     (0, common_1.Module)({
+        imports: [auth_module_1.AuthModule, typeorm_1.TypeOrmModule.forFeature([user_action_entity_1.UserActionEntity, plant_entity_1.PlantEntity])],
         controllers: [user_actions_controller_1.UserActionsController],
-        providers: [user_actions_service_1.UserActionsService],
+        providers: [user_actions_service_1.UserActionsService, plants_service_1.PlantsService],
     })
 ], UserActionsModule);
 //# sourceMappingURL=user-actions.module.js.map

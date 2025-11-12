@@ -1,12 +1,10 @@
 import { UserActionsService } from './user-actions.service';
 import { CreateUserActionDto } from './dto/create-user-action.dto';
-import { UpdateUserActionDto } from './dto/update-user-action.dto';
 export declare class UserActionsController {
-    private readonly userActionsService;
+    private userActionsService;
     constructor(userActionsService: UserActionsService);
-    create(createUserActionDto: CreateUserActionDto): Promise<import("./entities/user-action.entity").UserActionEntity>;
-    findAll(): any;
-    findOne(id: string): any;
-    update(id: string, updateUserActionDto: UpdateUserActionDto): any;
-    remove(id: string): any;
+    create(req: any, plantId: string, createUserActionDto: CreateUserActionDto): Promise<import("./entities/user-action.entity").UserActionEntity>;
+    getAllActions(req: any, plantId: string): Promise<import("./entities/user-action.entity").UserActionEntity[]>;
+    getRecentActions(req: any, plantId: string, days?: number): Promise<import("./entities/user-action.entity").UserActionEntity[]>;
+    getActionsByType(req: any, plantId: string, actionType: string): Promise<import("./entities/user-action.entity").UserActionEntity[]>;
 }

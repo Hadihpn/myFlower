@@ -14,68 +14,73 @@ var __param = (this && this.__param) || function (paramIndex, decorator) {
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.UserActionsController = void 0;
 const common_1 = require("@nestjs/common");
+const swagger_1 = require("@nestjs/swagger");
 const user_actions_service_1 = require("./user-actions.service");
 const create_user_action_dto_1 = require("./dto/create-user-action.dto");
-const update_user_action_dto_1 = require("./dto/update-user-action.dto");
+const auth_decorator_1 = require("../../common/decorators/auth.decorator");
 let UserActionsController = class UserActionsController {
     userActionsService;
     constructor(userActionsService) {
         this.userActionsService = userActionsService;
     }
-    create(createUserActionDto) {
-        return this.userActionsService.create(createUserActionDto);
+    async create(req, plantId, createUserActionDto) {
+        return await this.userActionsService.create(plantId, req.user.id, createUserActionDto);
     }
-    findAll() {
-        return this.userActionsService.findAll();
+    async getAllActions(req, plantId) {
+        return await this.userActionsService.getAllActionsForPlant(plantId, req.user.id);
     }
-    findOne(id) {
-        return this.userActionsService.findOne(+id);
+    async getRecentActions(req, plantId, days) {
+        return await this.userActionsService.getRecentActions(plantId, req.user.id, days);
     }
-    update(id, updateUserActionDto) {
-        return this.userActionsService.update(+id, updateUserActionDto);
-    }
-    remove(id) {
-        return this.userActionsService.remove(+id);
+    async getActionsByType(req, plantId, actionType) {
+        return await this.userActionsService.getActionsByType(plantId, req.user.id, actionType);
     }
 };
 exports.UserActionsController = UserActionsController;
 __decorate([
-    (0, common_1.Post)(),
-    __param(0, (0, common_1.Body)()),
+    (0, common_1.Post)('plant/:plantId'),
+    (0, swagger_1.ApiOperation)({ summary: 'Record a care action for a plant' }),
+    __param(0, (0, common_1.Request)()),
+    __param(1, (0, common_1.Param)('plantId')),
+    __param(2, (0, common_1.Body)()),
     __metadata("design:type", Function),
-    __metadata("design:paramtypes", [create_user_action_dto_1.CreateUserActionDto]),
-    __metadata("design:returntype", void 0)
+    __metadata("design:paramtypes", [Object, String, create_user_action_dto_1.CreateUserActionDto]),
+    __metadata("design:returntype", Promise)
 ], UserActionsController.prototype, "create", null);
 __decorate([
-    (0, common_1.Get)(),
+    (0, common_1.Get)('plant/:plantId'),
+    (0, swagger_1.ApiOperation)({ summary: 'Get all actions for a plant' }),
+    __param(0, (0, common_1.Request)()),
+    __param(1, (0, common_1.Param)('plantId')),
     __metadata("design:type", Function),
-    __metadata("design:paramtypes", []),
-    __metadata("design:returntype", void 0)
-], UserActionsController.prototype, "findAll", null);
+    __metadata("design:paramtypes", [Object, String]),
+    __metadata("design:returntype", Promise)
+], UserActionsController.prototype, "getAllActions", null);
 __decorate([
-    (0, common_1.Get)(':id'),
-    __param(0, (0, common_1.Param)('id')),
+    (0, common_1.Get)('plant/:plantId/recent'),
+    (0, swagger_1.ApiOperation)({ summary: 'Get recent actions for a plant' }),
+    __param(0, (0, common_1.Request)()),
+    __param(1, (0, common_1.Param)('plantId')),
+    __param(2, (0, common_1.Query)('days')),
     __metadata("design:type", Function),
-    __metadata("design:paramtypes", [String]),
-    __metadata("design:returntype", void 0)
-], UserActionsController.prototype, "findOne", null);
+    __metadata("design:paramtypes", [Object, String, Number]),
+    __metadata("design:returntype", Promise)
+], UserActionsController.prototype, "getRecentActions", null);
 __decorate([
-    (0, common_1.Patch)(':id'),
-    __param(0, (0, common_1.Param)('id')),
-    __param(1, (0, common_1.Body)()),
+    (0, common_1.Get)('plant/:plantId/type/:actionType'),
+    (0, swagger_1.ApiOperation)({ summary: 'Get actions by type for a plant' }),
+    __param(0, (0, common_1.Request)()),
+    __param(1, (0, common_1.Param)('plantId')),
+    __param(2, (0, common_1.Param)('actionType')),
     __metadata("design:type", Function),
-    __metadata("design:paramtypes", [String, update_user_action_dto_1.UpdateUserActionDto]),
-    __metadata("design:returntype", void 0)
-], UserActionsController.prototype, "update", null);
-__decorate([
-    (0, common_1.Delete)(':id'),
-    __param(0, (0, common_1.Param)('id')),
-    __metadata("design:type", Function),
-    __metadata("design:paramtypes", [String]),
-    __metadata("design:returntype", void 0)
-], UserActionsController.prototype, "remove", null);
+    __metadata("design:paramtypes", [Object, String, String]),
+    __metadata("design:returntype", Promise)
+], UserActionsController.prototype, "getActionsByType", null);
 exports.UserActionsController = UserActionsController = __decorate([
+    (0, swagger_1.ApiTags)('User Actions'),
     (0, common_1.Controller)('user-actions'),
+    (0, auth_decorator_1.UserAuth)(),
+    (0, swagger_1.ApiBearerAuth)(),
     __metadata("design:paramtypes", [user_actions_service_1.UserActionsService])
 ], UserActionsController);
 //# sourceMappingURL=user-actions.controller.js.map
