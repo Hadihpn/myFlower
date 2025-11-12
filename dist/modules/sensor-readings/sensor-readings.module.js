@@ -10,13 +10,19 @@ exports.SensorReadingsModule = void 0;
 const common_1 = require("@nestjs/common");
 const sensor_readings_service_1 = require("./sensor-readings.service");
 const sensor_readings_controller_1 = require("./sensor-readings.controller");
+const auth_module_1 = require("../auth/auth.module");
+const typeorm_1 = require("@nestjs/typeorm");
+const sensor_reading_entity_1 = require("./entities/sensor-reading.entity");
+const plants_service_1 = require("../plants/plants.service");
+const plant_entity_1 = require("../plants/entities/plant.entity");
 let SensorReadingsModule = class SensorReadingsModule {
 };
 exports.SensorReadingsModule = SensorReadingsModule;
 exports.SensorReadingsModule = SensorReadingsModule = __decorate([
     (0, common_1.Module)({
+        imports: [auth_module_1.AuthModule, typeorm_1.TypeOrmModule.forFeature([sensor_reading_entity_1.SensorReadingEntity, plant_entity_1.PlantEntity])],
         controllers: [sensor_readings_controller_1.SensorReadingsController],
-        providers: [sensor_readings_service_1.SensorReadingsService],
+        providers: [sensor_readings_service_1.SensorReadingsService, plants_service_1.PlantsService],
     })
 ], SensorReadingsModule);
 //# sourceMappingURL=sensor-readings.module.js.map

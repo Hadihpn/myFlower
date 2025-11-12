@@ -14,67 +14,76 @@ var __param = (this && this.__param) || function (paramIndex, decorator) {
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.SensorReadingsController = void 0;
 const common_1 = require("@nestjs/common");
+const swagger_1 = require("@nestjs/swagger");
 const sensor_readings_service_1 = require("./sensor-readings.service");
 const create_sensor_reading_dto_1 = require("./dto/create-sensor-reading.dto");
-const update_sensor_reading_dto_1 = require("./dto/update-sensor-reading.dto");
+const auth_decorator_1 = require("../../common/decorators/auth.decorator");
 let SensorReadingsController = class SensorReadingsController {
     sensorReadingsService;
     constructor(sensorReadingsService) {
         this.sensorReadingsService = sensorReadingsService;
     }
-    create(createSensorReadingDto) {
-        return this.sensorReadingsService.create(createSensorReadingDto);
+    async create(createSensorReadingDto) {
+        return await this.sensorReadingsService.create(createSensorReadingDto);
     }
-    findAll() {
-        return this.sensorReadingsService.findAll();
+    async findByPlant(req, plantId, limit) {
+        return await this.sensorReadingsService.findByPlant(plantId, req.user.id, limit);
     }
-    findOne(id) {
-        return this.sensorReadingsService.findOne(+id);
+    async getLatest(req, plantId) {
+        return await this.sensorReadingsService.getLatestReading(plantId, req.user.id);
     }
-    update(id, updateSensorReadingDto) {
-        return this.sensorReadingsService.update(+id, updateSensorReadingDto);
-    }
-    remove(id) {
-        return this.sensorReadingsService.remove(+id);
+    async getDailyAggregates(req, plantId, days) {
+        return await this.sensorReadingsService.getDailyAggregates(plantId, req.user.id, days);
     }
 };
 exports.SensorReadingsController = SensorReadingsController;
 __decorate([
     (0, common_1.Post)(),
+    (0, swagger_1.ApiOperation)({
+        summary: 'Create sensor reading (from IoT device - no auth required)',
+    }),
     __param(0, (0, common_1.Body)()),
     __metadata("design:type", Function),
     __metadata("design:paramtypes", [create_sensor_reading_dto_1.CreateSensorReadingDto]),
-    __metadata("design:returntype", void 0)
+    __metadata("design:returntype", Promise)
 ], SensorReadingsController.prototype, "create", null);
 __decorate([
-    (0, common_1.Get)(),
+    (0, common_1.Get)('plant/:plantId'),
+    (0, auth_decorator_1.UserAuth)(),
+    (0, swagger_1.ApiBearerAuth)(),
+    (0, swagger_1.ApiOperation)({ summary: 'Get sensor readings for a plant' }),
+    __param(0, (0, common_1.Request)()),
+    __param(1, (0, common_1.Param)('plantId')),
+    __param(2, (0, common_1.Query)('limit')),
     __metadata("design:type", Function),
-    __metadata("design:paramtypes", []),
-    __metadata("design:returntype", void 0)
-], SensorReadingsController.prototype, "findAll", null);
+    __metadata("design:paramtypes", [Object, String, Number]),
+    __metadata("design:returntype", Promise)
+], SensorReadingsController.prototype, "findByPlant", null);
 __decorate([
-    (0, common_1.Get)(':id'),
-    __param(0, (0, common_1.Param)('id')),
+    (0, common_1.Get)('plant/:plantId/latest'),
+    (0, auth_decorator_1.UserAuth)(),
+    (0, swagger_1.ApiBearerAuth)(),
+    (0, swagger_1.ApiOperation)({ summary: 'Get latest sensor reading for a plant' }),
+    __param(0, (0, common_1.Request)()),
+    __param(1, (0, common_1.Param)('plantId')),
     __metadata("design:type", Function),
-    __metadata("design:paramtypes", [String]),
-    __metadata("design:returntype", void 0)
-], SensorReadingsController.prototype, "findOne", null);
+    __metadata("design:paramtypes", [Object, String]),
+    __metadata("design:returntype", Promise)
+], SensorReadingsController.prototype, "getLatest", null);
 __decorate([
-    (0, common_1.Patch)(':id'),
-    __param(0, (0, common_1.Param)('id')),
-    __param(1, (0, common_1.Body)()),
+    (0, common_1.Get)('plant/:plantId/daily'),
+    (0, auth_decorator_1.UserAuth)(),
+    (0, swagger_1.ApiBearerAuth)(),
+    (0, swagger_1.ApiOperation)({ summary: 'Get daily aggregates for a plant' }),
+    __param(0, (0, common_1.Request)()),
+    __param(1, (0, common_1.Param)('plantId')),
+    __param(2, (0, common_1.Query)('days')),
     __metadata("design:type", Function),
-    __metadata("design:paramtypes", [String, update_sensor_reading_dto_1.UpdateSensorReadingDto]),
-    __metadata("design:returntype", void 0)
-], SensorReadingsController.prototype, "update", null);
-__decorate([
-    (0, common_1.Delete)(':id'),
-    __param(0, (0, common_1.Param)('id')),
-    __metadata("design:type", Function),
-    __metadata("design:paramtypes", [String]),
-    __metadata("design:returntype", void 0)
-], SensorReadingsController.prototype, "remove", null);
+    __metadata("design:paramtypes", [Object, String, Number]),
+    __metadata("design:returntype", Promise)
+], SensorReadingsController.prototype, "getDailyAggregates", null);
 exports.SensorReadingsController = SensorReadingsController = __decorate([
+    (0, swagger_1.ApiTags)('Sensor Readings'),
     (0, common_1.Controller)('sensor-readings'),
     __metadata("design:paramtypes", [sensor_readings_service_1.SensorReadingsService])
 ], SensorReadingsController);
