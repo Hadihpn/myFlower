@@ -19,6 +19,7 @@ const plants_module_1 = require("./modules/plants/plants.module");
 const user_module_1 = require("./modules/users/user.module");
 const sensor_readings_module_1 = require("./modules/sensor-readings/sensor-readings.module");
 const db_config_1 = require("./config/db.config");
+const advice_module_1 = require("./modules/advice/advice.module");
 let AppModule = class AppModule {
 };
 exports.AppModule = AppModule;
@@ -38,6 +39,7 @@ exports.AppModule = AppModule = __decorate([
             user_module_1.UserModule,
             plants_module_1.PlantsModule,
             sensor_readings_module_1.SensorReadingsModule,
+            advice_module_1.AdviceModule,
         ],
         controllers: [app_controller_1.AppController],
         providers: [app_service_1.AppService],

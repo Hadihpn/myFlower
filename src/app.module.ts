@@ -10,6 +10,7 @@ import { PlantsModule } from './modules/plants/plants.module';
 import { UserModule } from './modules/users/user.module';
 import { SensorReadingsModule } from './modules/sensor-readings/sensor-readings.module';
 import { getDatabaseConfig } from './config/db.config';
+import { AdviceModule } from './modules/advice/advice.module';
 
 @Module({
   imports: [
@@ -26,6 +27,7 @@ import { getDatabaseConfig } from './config/db.config';
     UserModule,
     PlantsModule,
     SensorReadingsModule,
+    AdviceModule,
   ],
   controllers: [AppController],
   providers: [AppService],
