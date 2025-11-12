@@ -4,9 +4,9 @@ import { UpdateSensorReadingDto } from './dto/update-sensor-reading.dto';
 export declare class SensorReadingsController {
     private readonly sensorReadingsService;
     constructor(sensorReadingsService: SensorReadingsService);
-    create(createSensorReadingDto: CreateSensorReadingDto): string;
-    findAll(): string;
-    findOne(id: string): string;
-    update(id: string, updateSensorReadingDto: UpdateSensorReadingDto): string;
-    remove(id: string): string;
+    create(createSensorReadingDto: CreateSensorReadingDto): Promise<import("./entities/sensor-reading.entity").SensorReadingEntity>;
+    findAll(): any;
+    findOne(id: string): any;
+    update(id: string, updateSensorReadingDto: UpdateSensorReadingDto): any;
+    remove(id: string): any;
 }

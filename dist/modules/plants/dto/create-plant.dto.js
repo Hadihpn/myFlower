@@ -16,6 +16,7 @@ class CreatePlantDto {
     name;
     species;
     description;
+    status;
     location;
     plantedDate;
     deviceId;
@@ -37,6 +38,11 @@ __decorate([
     (0, class_validator_1.IsString)(),
     __metadata("design:type", String)
 ], CreatePlantDto.prototype, "description", void 0);
+__decorate([
+    (0, swagger_1.ApiProperty)({ example: 'active' }),
+    (0, class_validator_1.IsString)(),
+    __metadata("design:type", String)
+], CreatePlantDto.prototype, "status", void 0);
 __decorate([
     (0, swagger_1.ApiProperty)({ example: 'محل نگهداری', required: false }),
     (0, class_validator_1.IsOptional)(),

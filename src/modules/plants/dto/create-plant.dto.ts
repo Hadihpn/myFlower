@@ -14,6 +14,9 @@ export class CreatePlantDto {
   @IsOptional()
   @IsString()
   description?: string;
+  @ApiProperty({ example: 'active' })
+  @IsString()
+  status: string;
 
   @ApiProperty({ example: 'محل نگهداری', required: false })
   @IsOptional()
@@ -27,4 +30,5 @@ export class CreatePlantDto {
   @ApiProperty()
   @IsString()
   deviceId: string;
+  
 }

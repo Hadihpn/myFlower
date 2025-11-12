@@ -39,10 +39,10 @@ export class PlantEntity {
   @Column({ unique: true })
   deviceId: string; // Unique identifier for the IoT device
 
-  @CreateDateColumn()
+  @CreateDateColumn({nullable:true})
   createdAt: Date;
 
-  @UpdateDateColumn()
+  @UpdateDateColumn({nullable:true})
   updatedAt: Date;
 
   @ManyToOne(() => UserEntity, (user) => user.plants, { onDelete: 'CASCADE' })

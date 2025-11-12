@@ -63,11 +63,11 @@ __decorate([
     __metadata("design:type", String)
 ], PlantEntity.prototype, "deviceId", void 0);
 __decorate([
-    (0, typeorm_1.CreateDateColumn)(),
+    (0, typeorm_1.CreateDateColumn)({ nullable: true }),
     __metadata("design:type", Date)
 ], PlantEntity.prototype, "createdAt", void 0);
 __decorate([
-    (0, typeorm_1.UpdateDateColumn)(),
+    (0, typeorm_1.UpdateDateColumn)({ nullable: true }),
     __metadata("design:type", Date)
 ], PlantEntity.prototype, "updatedAt", void 0);
 __decorate([

@@ -10,11 +10,15 @@ exports.PlantsModule = void 0;
 const common_1 = require("@nestjs/common");
 const plants_service_1 = require("./plants.service");
 const plants_controller_1 = require("./plants.controller");
+const typeorm_1 = require("@nestjs/typeorm");
+const plant_entity_1 = require("./entities/plant.entity");
+const auth_module_1 = require("../auth/auth.module");
 let PlantsModule = class PlantsModule {
 };
 exports.PlantsModule = PlantsModule;
 exports.PlantsModule = PlantsModule = __decorate([
     (0, common_1.Module)({
+        imports: [auth_module_1.AuthModule, typeorm_1.TypeOrmModule.forFeature([plant_entity_1.PlantEntity])],
         controllers: [plants_controller_1.PlantsController],
         providers: [plants_service_1.PlantsService],
     })
