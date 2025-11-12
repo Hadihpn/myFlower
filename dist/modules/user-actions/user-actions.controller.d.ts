@@ -4,9 +4,9 @@ import { UpdateUserActionDto } from './dto/update-user-action.dto';
 export declare class UserActionsController {
     private readonly userActionsService;
     constructor(userActionsService: UserActionsService);
-    create(createUserActionDto: CreateUserActionDto): string;
-    findAll(): string;
-    findOne(id: string): string;
-    update(id: string, updateUserActionDto: UpdateUserActionDto): string;
-    remove(id: string): string;
+    create(createUserActionDto: CreateUserActionDto): Promise<import("./entities/user-action.entity").UserActionEntity>;
+    findAll(): any;
+    findOne(id: string): any;
+    update(id: string, updateUserActionDto: UpdateUserActionDto): any;
+    remove(id: string): any;
 }

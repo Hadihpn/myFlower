@@ -1,26 +1,78 @@
 import { Injectable } from '@nestjs/common';
+import { InjectRepository } from '@nestjs/typeorm';
+import { Repository, MoreThan } from 'typeorm';
 import { CreateUserActionDto } from './dto/create-user-action.dto';
-import { UpdateUserActionDto } from './dto/update-user-action.dto';
+import { PlantsService } from '../plants/plants.service';
+import { UserActionEntity } from './entities/user-action.entity';
 
 @Injectable()
 export class UserActionsService {
-  create(createUserActionDto: CreateUserActionDto) {
-    return 'This action adds a new userAction';
+  constructor(
+    @InjectRepository(UserActionEntity)
+    private userActionsRepository: Repository<UserActionEntity>,
+    private plantsService: PlantsService,
+  ) {}
+
+  async create(
+    plantId: string,
+    userId: string,
+    createUserActionDto: CreateUserActionDto,
+  ): Promise<UserActionEntity> {
+    // Verify user owns the plant
+    await this.plantsService.findOne(plantId, userId);
+
+    const userAction = this.userActionsRepository.create({
+      ...createUserActionDto,
+      actionDate: new Date(createUserActionDto.actionDate),
+      plantId,
+      userId,
+    });
+
+    return await this.userActionsRepository.save(userAction);
   }
 
-  findAll() {
-    return `This action returns all userActions`;
+  async getRecentActions(
+    plantId: string,
+    userId: string,
+    days: number = 30,
+  ): Promise<UserActionEntity[]> {
+    const startDate = new Date();
+    startDate.setDate(startDate.getDate() - days);
+
+    return await this.userActionsRepository.find({
+      where: {
+        plantId,
+        userId,
+        actionDate: MoreThan(startDate),
+      },
+      order: { actionDate: 'DESC' },
+    });
   }
 
-  findOne(id: number) {
-    return `This action returns a #${id} userAction`;
+  async getAllActionsForPlant(
+    plantId: string,
+    userId: string,
+  ): Promise<UserActionEntity[]> {
+    // Verify user owns the plant
+    await this.plantsService.findOne(plantId, userId);
+
+    return await this.userActionsRepository.find({
+      where: { plantId, userId },
+      order: { actionDate: 'DESC' },
+    });
   }
 
-  update(id: number, updateUserActionDto: UpdateUserActionDto) {
-    return `This action updates a #${id} userAction`;
-  }
+  async getActionsByType(
+    plantId: string,
+    userId: string,
+    actionType: string,
+  ): Promise<UserActionEntity[]> {
+    // Verify user owns the plant
+    await this.plantsService.findOne(plantId, userId);
 
-  remove(id: number) {
-    return `This action removes a #${id} userAction`;
+    return await this.userActionsRepository.find({
+      where: { plantId, userId, actionType: actionType as any },
+      order: { actionDate: 'DESC' },
+    });
   }
 }

@@ -54,4 +54,9 @@ export declare class AdviceService {
         overallHealth: string;
         thresholds: any;
     }>;
+    private detectSuddenChanges;
+    private analyzeCurrentConditions;
+    private analyzeCareHistory;
+    private analyzeTrends;
+    private calculateAverage;
 }
