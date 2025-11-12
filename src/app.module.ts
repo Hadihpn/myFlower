@@ -11,6 +11,7 @@ import { UserModule } from './modules/users/user.module';
 import { SensorReadingsModule } from './modules/sensor-readings/sensor-readings.module';
 import { getDatabaseConfig } from './config/db.config';
 import { AdviceModule } from './modules/advice/advice.module';
+import { UserActionsModule } from './modules/user-actions/user-actions.module';
 
 @Module({
   imports: [
@@ -28,6 +29,7 @@ import { AdviceModule } from './modules/advice/advice.module';
     PlantsModule,
     SensorReadingsModule,
     AdviceModule,
+    UserActionsModule,
   ],
   controllers: [AppController],
   providers: [AppService],

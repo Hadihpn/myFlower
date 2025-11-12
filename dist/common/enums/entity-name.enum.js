@@ -7,5 +7,6 @@ var EntityEnums;
     EntityEnums["Plant"] = "plant";
     EntityEnums["PlantType"] = "plant_type";
     EntityEnums["SensorReadings"] = "sensor_readings";
+    EntityEnums["UserActions"] = "user_actions";
 })(EntityEnums || (exports.EntityEnums = EntityEnums = {}));
 //# sourceMappingURL=entity-name.enum.js.map

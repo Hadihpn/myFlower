@@ -45,7 +45,7 @@ export declare class AdviceController {
             readingsCount: number;
             lastReading: Date;
         };
-        advice: import("./advice.service").AdviceItem[];
+        advice: AdviceItem[];
         overallHealth: string;
         thresholds: any;
     }>;

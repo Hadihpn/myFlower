@@ -1,14 +1,12 @@
 import { PlantsService } from '../plants/plants.service';
-export interface AdviceItem {
-    type: 'warning' | 'info' | 'success';
-    category: 'temperature' | 'moisture' | 'light' | 'general';
-    message: string;
-    priority: number;
-}
+import { SensorReadingsService } from '../sensor-readings/sensor-readings.service';
+import { UserActionsService } from '../user-actions/user-actions.service';
 export declare class AdviceService {
+    private sensorReadingsService;
     private plantsService;
+    private userActionsService;
     private readonly plantThresholds;
-    constructor(plantsService: PlantsService);
+    constructor(sensorReadingsService: SensorReadingsService, plantsService: PlantsService, userActionsService: UserActionsService);
     getAdviceForPlant(plantId: string, userId: string): Promise<{
         plant: {
             id: string;

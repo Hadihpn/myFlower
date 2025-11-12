@@ -12,8 +12,12 @@ Object.defineProperty(exports, "__esModule", { value: true });
 exports.AdviceService = void 0;
 const common_1 = require("@nestjs/common");
 const plants_service_1 = require("../plants/plants.service");
+const sensor_readings_service_1 = require("../sensor-readings/sensor-readings.service");
+const user_actions_service_1 = require("../user-actions/user-actions.service");
 let AdviceService = class AdviceService {
+    sensorReadingsService;
     plantsService;
+    userActionsService;
     plantThresholds = {
         default: {
             temperature: { min: 15, max: 30, ideal: { min: 18, max: 25 } },
@@ -36,8 +40,10 @@ let AdviceService = class AdviceService {
             light: { min: 15000, max: 45000, ideal: { min: 20000, max: 30000 } },
         },
     };
-    constructor(plantsService) {
+    constructor(sensorReadingsService, plantsService, userActionsService) {
+        this.sensorReadingsService = sensorReadingsService;
         this.plantsService = plantsService;
+        this.userActionsService = userActionsService;
     }
     async getAdviceForPlant(plantId, userId) {
         const plant = await this.plantsService.findOne(plantId, userId);
@@ -211,6 +217,8 @@ let AdviceService = class AdviceService {
 exports.AdviceService = AdviceService;
 exports.AdviceService = AdviceService = __decorate([
     (0, common_1.Injectable)(),
-    __metadata("design:paramtypes", [plants_service_1.PlantsService])
+    __metadata("design:paramtypes", [sensor_readings_service_1.SensorReadingsService,
+        plants_service_1.PlantsService,
+        user_actions_service_1.UserActionsService])
 ], AdviceService);
 //# sourceMappingURL=advice.service.js.map

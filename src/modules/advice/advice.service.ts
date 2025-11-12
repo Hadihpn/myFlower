@@ -1,14 +1,9 @@
 import { Injectable } from '@nestjs/common';
 // import { SensorReadingsService } from '../sensor-readings/sensor-readings.service';
 import { PlantsService } from '../plants/plants.service';
-// import { AdviceItem } from './interface/advice.interface';
+import { SensorReadingsService } from '../sensor-readings/sensor-readings.service';
+import { UserActionsService } from '../user-actions/user-actions.service';
 
-export interface AdviceItem {
-  type: 'warning' | 'info' | 'success';
-  category: 'temperature' | 'moisture' | 'light' | 'general';
-  message: string;
-  priority: number; // 1=high, 2=medium, 3=low
-}
 
 @Injectable()
 export class AdviceService {
@@ -38,7 +33,9 @@ export class AdviceService {
 
   constructor(
     // private sensorReadingsService: SensorReadingsService,
+     private sensorReadingsService: SensorReadingsService,
     private plantsService: PlantsService,
+    private userActionsService: UserActionsService,
   ) {}
 
   async getAdviceForPlant(plantId: string, userId: string) {

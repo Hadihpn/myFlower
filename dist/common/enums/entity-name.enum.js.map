@@ -1,1 +1,1 @@
-{"version":3,"file":"entity-name.enum.js","sourceRoot":"","sources":["../../../src/common/enums/entity-name.enum.ts"],"names":[],"mappings":";;;AAAA,IAAY,WAKX;AALD,WAAY,WAAW;IACrB,4BAAa,CAAA;IACb,8BAAe,CAAA;IACf,uCAAwB,CAAA;IACxB,iDAAkC,CAAA;AACpC,CAAC,EALW,WAAW,2BAAX,WAAW,QAKtB"}
+{"version":3,"file":"entity-name.enum.js","sourceRoot":"","sources":["../../../src/common/enums/entity-name.enum.ts"],"names":[],"mappings":";;;AAAA,IAAY,WAMX;AAND,WAAY,WAAW;IACrB,4BAAa,CAAA;IACb,8BAAe,CAAA;IACf,uCAAwB,CAAA;IACxB,iDAAkC,CAAA;IAClC,2CAA0B,CAAA;AAC5B,CAAC,EANW,WAAW,2BAAX,WAAW,QAMtB"}
