@@ -36,7 +36,7 @@ export class AdviceService {
     private userActionsService: UserActionsService,
   ) {}
 
-  async getAdviceForPlant(plantId: string, userId: string) {
+  async getAdviceForPlant(plantId: number, userId: number) {
     const plant = await this.plantsService.findOne(plantId, userId);
     const statistics = await this.plantsService.getPlantStatistics(
       plantId,
@@ -285,8 +285,8 @@ export class AdviceService {
 
   // NEW: Analyze user care history
   private async analyzeCareHistory(
-    plantId: string,
-    userId: string,
+    plantId: number,
+    userId: number,
     plant: any,
   ) {
     const advice: AdviceItem[] = [];

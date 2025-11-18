@@ -23,7 +23,7 @@ export class UserActionsController {
   @ApiOperation({ summary: 'Record a care action for a plant' })
   async create(
     @Request() req,
-    @Param('plantId') plantId: string,
+    @Param('plantId') plantId: number,
     @Body() createUserActionDto: CreateUserActionDto,
   ) {
     return await this.userActionsService.create(
@@ -35,7 +35,7 @@ export class UserActionsController {
 
   @Get('plant/:plantId')
   @ApiOperation({ summary: 'Get all actions for a plant' })
-  async getAllActions(@Request() req, @Param('plantId') plantId: string) {
+  async getAllActions(@Request() req, @Param('plantId') plantId: number) {
     return await this.userActionsService.getAllActionsForPlant(
       plantId,
       req.user.id,
@@ -46,7 +46,7 @@ export class UserActionsController {
   @ApiOperation({ summary: 'Get recent actions for a plant' })
   async getRecentActions(
     @Request() req,
-    @Param('plantId') plantId: string,
+    @Param('plantId') plantId: number,
     @Query('days') days?: number,
   ) {
     return await this.userActionsService.getRecentActions(
@@ -60,7 +60,7 @@ export class UserActionsController {
   @ApiOperation({ summary: 'Get actions by type for a plant' })
   async getActionsByType(
     @Request() req,
-    @Param('plantId') plantId: string,
+    @Param('plantId') plantId: number,
     @Param('actionType') actionType: string,
   ) {
     return await this.userActionsService.getActionsByType(

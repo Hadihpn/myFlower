@@ -2,9 +2,9 @@ import { AdviceService } from './advice.service';
 export declare class AdviceController {
     private adviceService;
     constructor(adviceService: AdviceService);
-    getAdvice(req: any, plantId: string): Promise<{
+    getAdvice(req: any, plantId: number): Promise<{
         plant: {
-            id: string;
+            id: number;
             name: string;
             species: string;
         };
@@ -19,7 +19,7 @@ export declare class AdviceController {
         thresholds?: undefined;
     } | {
         plant: {
-            id: string;
+            id: number;
             name: string;
             species: string;
         };

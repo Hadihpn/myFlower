@@ -5,15 +5,15 @@ import { PlantEntity } from './entities/plant.entity';
 export declare class PlantsService {
     private plantsRepository;
     constructor(plantsRepository: Repository<PlantEntity>);
-    create(userId: string, createPlantDto: CreatePlantDto): Promise<PlantEntity>;
-    findAll(userId: string): Promise<PlantEntity[]>;
-    findOne(id: string, userId: string): Promise<PlantEntity>;
+    create(userId: number, createPlantDto: CreatePlantDto): Promise<PlantEntity>;
+    findAll(userId: number): Promise<PlantEntity[]>;
+    findOne(id: number, userId: number): Promise<PlantEntity>;
     findByDeviceId(deviceId: string): Promise<PlantEntity | null>;
-    update(id: string, userId: string, updatePlantDto: UpdatePlantDto): Promise<PlantEntity>;
-    remove(id: string, userId: string): Promise<void>;
-    getPlantStatistics(plantId: string, userId: string): Promise<{
+    update(id: number, userId: number, updatePlantDto: UpdatePlantDto): Promise<PlantEntity>;
+    remove(id: number, userId: number): Promise<void>;
+    getPlantStatistics(plantId: number, userId: number): Promise<{
         plant: {
-            id: string;
+            id: number;
             name: string;
             species: string;
         };
@@ -21,7 +21,7 @@ export declare class PlantsService {
         message: string;
     } | {
         plant: {
-            id: string;
+            id: number;
             name: string;
             species: string;
         };

@@ -7,9 +7,9 @@ export declare class AdviceService {
     private userActionsService;
     private readonly plantThresholds;
     constructor(sensorReadingsService: SensorReadingsService, plantsService: PlantsService, userActionsService: UserActionsService);
-    getAdviceForPlant(plantId: string, userId: string): Promise<{
+    getAdviceForPlant(plantId: number, userId: number): Promise<{
         plant: {
-            id: string;
+            id: number;
             name: string;
             species: string;
         };
@@ -24,7 +24,7 @@ export declare class AdviceService {
         thresholds?: undefined;
     } | {
         plant: {
-            id: string;
+            id: number;
             name: string;
             species: string;
         };

@@ -6,8 +6,8 @@ export declare class UserActionsService {
     private userActionsRepository;
     private plantsService;
     constructor(userActionsRepository: Repository<UserActionEntity>, plantsService: PlantsService);
-    create(plantId: string, userId: string, createUserActionDto: CreateUserActionDto): Promise<UserActionEntity>;
-    getRecentActions(plantId: string, userId: string, days?: number): Promise<UserActionEntity[]>;
-    getAllActionsForPlant(plantId: string, userId: string): Promise<UserActionEntity[]>;
-    getActionsByType(plantId: string, userId: string, actionType: string): Promise<UserActionEntity[]>;
+    create(plantId: number, userId: number, createUserActionDto: CreateUserActionDto): Promise<UserActionEntity>;
+    getRecentActions(plantId: number, userId: number, days?: number): Promise<UserActionEntity[]>;
+    getAllActionsForPlant(plantId: number, userId: number): Promise<UserActionEntity[]>;
+    getActionsByType(plantId: number, userId: number, actionType: string): Promise<UserActionEntity[]>;
 }

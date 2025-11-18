@@ -15,7 +15,7 @@ import {
 @Entity(EntityEnums.Plant)
 export class PlantEntity {
   @PrimaryGeneratedColumn('increment')
-  id: string;
+  id: number;
 
   @Column()
   name: string;
@@ -50,7 +50,7 @@ export class PlantEntity {
   user: UserEntity;
 
   @Column()
-  userId: string;
+  userId: number;
   @OneToMany(() => SensorReadingEntity, (reading) => reading.plant)
   sensorReadings: SensorReadingEntity[];
 }

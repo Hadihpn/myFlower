@@ -13,8 +13,8 @@ import { EntityEnums } from 'src/common/enums/entity-name.enum';
 @Entity(EntityEnums.SensorReadings)
 @Index(['plantId', 'timestamp']) // For efficient querying
 export class SensorReadingEntity {
-  @PrimaryGeneratedColumn('uuid')
-  id: string;
+  @PrimaryGeneratedColumn('increment')
+  id: number;
 
   @Column({ type: 'decimal', precision: 5, scale: 2 })
   temperature: number; // in Celsius
@@ -32,7 +32,7 @@ export class SensorReadingEntity {
   createdAt: Date;
 
   @Column()
-  plantId: string;
+  plantId: number;
   @ManyToOne(() => PlantEntity, (plant) => plant.sensorReadings, {
     onDelete: 'CASCADE',
   })

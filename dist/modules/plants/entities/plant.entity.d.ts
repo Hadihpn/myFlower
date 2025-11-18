@@ -1,7 +1,7 @@
 import { SensorReadingEntity } from 'src/modules/sensor-readings/entities/sensor-reading.entity';
 import { UserEntity } from 'src/modules/users/entities/user.entity';
 export declare class PlantEntity {
-    id: string;
+    id: number;
     name: string;
     species: string;
     description: string;
@@ -12,6 +12,6 @@ export declare class PlantEntity {
     createdAt: Date;
     updatedAt: Date;
     user: UserEntity;
-    userId: string;
+    userId: number;
     sensorReadings: SensorReadingEntity[];
 }

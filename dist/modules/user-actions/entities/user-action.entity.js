@@ -28,8 +28,8 @@ let UserActionEntity = class UserActionEntity {
 };
 exports.UserActionEntity = UserActionEntity;
 __decorate([
-    (0, typeorm_1.PrimaryGeneratedColumn)('uuid'),
-    __metadata("design:type", String)
+    (0, typeorm_1.PrimaryGeneratedColumn)('increment'),
+    __metadata("design:type", Number)
 ], UserActionEntity.prototype, "id", void 0);
 __decorate([
     (0, typeorm_1.Column)({
@@ -57,7 +57,7 @@ __decorate([
 ], UserActionEntity.prototype, "plant", void 0);
 __decorate([
     (0, typeorm_1.Column)(),
-    __metadata("design:type", String)
+    __metadata("design:type", Number)
 ], UserActionEntity.prototype, "plantId", void 0);
 __decorate([
     (0, typeorm_1.ManyToOne)(() => user_entity_1.UserEntity, { onDelete: 'CASCADE' }),
@@ -66,7 +66,7 @@ __decorate([
 ], UserActionEntity.prototype, "user", void 0);
 __decorate([
     (0, typeorm_1.Column)(),
-    __metadata("design:type", String)
+    __metadata("design:type", Number)
 ], UserActionEntity.prototype, "userId", void 0);
 exports.UserActionEntity = UserActionEntity = __decorate([
     (0, typeorm_1.Entity)(entity_name_enum_1.EntityEnums.UserActions)

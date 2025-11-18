@@ -6,10 +6,10 @@ export declare class PlantsController {
     constructor(plantsService: PlantsService);
     create(req: any, createPlantDto: CreatePlantDto): Promise<import("./entities/plant.entity").PlantEntity>;
     findAll(req: any): Promise<import("./entities/plant.entity").PlantEntity[]>;
-    findOne(req: any, id: string): Promise<import("./entities/plant.entity").PlantEntity>;
-    getStatistics(req: any, id: string): Promise<{
+    findOne(req: any, id: number): Promise<import("./entities/plant.entity").PlantEntity>;
+    getStatistics(req: any, id: number): Promise<{
         plant: {
-            id: string;
+            id: number;
             name: string;
             species: string;
         };
@@ -17,7 +17,7 @@ export declare class PlantsController {
         message: string;
     } | {
         plant: {
-            id: string;
+            id: number;
             name: string;
             species: string;
         };
@@ -45,8 +45,8 @@ export declare class PlantsController {
         };
         message?: undefined;
     }>;
-    update(req: any, id: string, updatePlantDto: UpdatePlantDto): Promise<import("./entities/plant.entity").PlantEntity>;
-    remove(req: any, id: string): Promise<{
+    update(req: any, id: number, updatePlantDto: UpdatePlantDto): Promise<import("./entities/plant.entity").PlantEntity>;
+    remove(req: any, id: number): Promise<{
         message: string;
     }>;
 }

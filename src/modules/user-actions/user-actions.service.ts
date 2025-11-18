@@ -14,8 +14,8 @@ export class UserActionsService {
   ) {}
 
   async create(
-    plantId: string,
-    userId: string,
+    plantId: number,
+    userId: number,
     createUserActionDto: CreateUserActionDto,
   ): Promise<UserActionEntity> {
     // Verify user owns the plant
@@ -32,8 +32,8 @@ export class UserActionsService {
   }
 
   async getRecentActions(
-    plantId: string,
-    userId: string,
+    plantId: number,
+    userId: number,
     days: number = 30,
   ): Promise<UserActionEntity[]> {
     const startDate = new Date();
@@ -50,8 +50,8 @@ export class UserActionsService {
   }
 
   async getAllActionsForPlant(
-    plantId: string,
-    userId: string,
+    plantId: number,
+    userId: number,
   ): Promise<UserActionEntity[]> {
     // Verify user owns the plant
     await this.plantsService.findOne(plantId, userId);
@@ -63,8 +63,8 @@ export class UserActionsService {
   }
 
   async getActionsByType(
-    plantId: string,
-    userId: string,
+    plantId: number,
+    userId: number,
     actionType: string,
   ): Promise<UserActionEntity[]> {
     // Verify user owns the plant

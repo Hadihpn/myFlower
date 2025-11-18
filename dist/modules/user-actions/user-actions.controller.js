@@ -44,7 +44,7 @@ __decorate([
     __param(1, (0, common_1.Param)('plantId')),
     __param(2, (0, common_1.Body)()),
     __metadata("design:type", Function),
-    __metadata("design:paramtypes", [Object, String, create_user_action_dto_1.CreateUserActionDto]),
+    __metadata("design:paramtypes", [Object, Number, create_user_action_dto_1.CreateUserActionDto]),
     __metadata("design:returntype", Promise)
 ], UserActionsController.prototype, "create", null);
 __decorate([
@@ -53,7 +53,7 @@ __decorate([
     __param(0, (0, common_1.Request)()),
     __param(1, (0, common_1.Param)('plantId')),
     __metadata("design:type", Function),
-    __metadata("design:paramtypes", [Object, String]),
+    __metadata("design:paramtypes", [Object, Number]),
     __metadata("design:returntype", Promise)
 ], UserActionsController.prototype, "getAllActions", null);
 __decorate([
@@ -63,7 +63,7 @@ __decorate([
     __param(1, (0, common_1.Param)('plantId')),
     __param(2, (0, common_1.Query)('days')),
     __metadata("design:type", Function),
-    __metadata("design:paramtypes", [Object, String, Number]),
+    __metadata("design:paramtypes", [Object, Number, Number]),
     __metadata("design:returntype", Promise)
 ], UserActionsController.prototype, "getRecentActions", null);
 __decorate([
@@ -73,7 +73,7 @@ __decorate([
     __param(1, (0, common_1.Param)('plantId')),
     __param(2, (0, common_1.Param)('actionType')),
     __metadata("design:type", Function),
-    __metadata("design:paramtypes", [Object, String, String]),
+    __metadata("design:paramtypes", [Object, Number, String]),
     __metadata("design:returntype", Promise)
 ], UserActionsController.prototype, "getActionsByType", null);
 exports.UserActionsController = UserActionsController = __decorate([

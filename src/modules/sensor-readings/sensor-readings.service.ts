@@ -39,8 +39,8 @@ export class SensorReadingsService {
   }
 
   async findByPlant(
-    plantId: string,
-    userId: string,
+    plantId: number,
+    userId: number,
     limit: number = 100,
   ): Promise<SensorReadingEntity[]> {
     // Verify user owns the plant
@@ -54,8 +54,8 @@ export class SensorReadingsService {
   }
 
   async findByDateRange(
-    plantId: string,
-    userId: string,
+    plantId: number,
+    userId: number,
     startDate: Date,
     endDate: Date,
   ): Promise<SensorReadingEntity[]> {
@@ -71,7 +71,7 @@ export class SensorReadingsService {
     });
   }
 
-  async getDailyAggregates(plantId: string, userId: string, days: number = 7) {
+  async getDailyAggregates(plantId: number, userId: number, days: number = 7) {
     // Verify user owns the plant
     await this.plantsService.findOne(plantId, userId);
 
@@ -119,8 +119,8 @@ export class SensorReadingsService {
   }
 
   async getLatestReading(
-    plantId: string,
-    userId: string,
+    plantId: number,
+    userId: number,
   ): Promise<SensorReadingEntity> {
     // Verify user owns the plant
     await this.plantsService.findOne(plantId, userId);

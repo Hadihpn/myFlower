@@ -68,7 +68,7 @@ __decorate([
     __param(0, (0, common_1.Request)()),
     __param(1, (0, common_1.Param)('id')),
     __metadata("design:type", Function),
-    __metadata("design:paramtypes", [Object, String]),
+    __metadata("design:paramtypes", [Object, Number]),
     __metadata("design:returntype", Promise)
 ], PlantsController.prototype, "findOne", null);
 __decorate([
@@ -77,7 +77,7 @@ __decorate([
     __param(0, (0, common_1.Request)()),
     __param(1, (0, common_1.Param)('id')),
     __metadata("design:type", Function),
-    __metadata("design:paramtypes", [Object, String]),
+    __metadata("design:paramtypes", [Object, Number]),
     __metadata("design:returntype", Promise)
 ], PlantsController.prototype, "getStatistics", null);
 __decorate([
@@ -87,7 +87,7 @@ __decorate([
     __param(1, (0, common_1.Param)('id')),
     __param(2, (0, common_1.Body)()),
     __metadata("design:type", Function),
-    __metadata("design:paramtypes", [Object, String, update_plant_dto_1.UpdatePlantDto]),
+    __metadata("design:paramtypes", [Object, Number, update_plant_dto_1.UpdatePlantDto]),
     __metadata("design:returntype", Promise)
 ], PlantsController.prototype, "update", null);
 __decorate([
@@ -96,7 +96,7 @@ __decorate([
     __param(0, (0, common_1.Request)()),
     __param(1, (0, common_1.Param)('id')),
     __metadata("design:type", Function),
-    __metadata("design:paramtypes", [Object, String]),
+    __metadata("design:paramtypes", [Object, Number]),
     __metadata("design:returntype", Promise)
 ], PlantsController.prototype, "remove", null);
 exports.PlantsController = PlantsController = __decorate([

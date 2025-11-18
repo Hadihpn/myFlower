@@ -25,8 +25,8 @@ let SensorReadingEntity = class SensorReadingEntity {
 };
 exports.SensorReadingEntity = SensorReadingEntity;
 __decorate([
-    (0, typeorm_1.PrimaryGeneratedColumn)('uuid'),
-    __metadata("design:type", String)
+    (0, typeorm_1.PrimaryGeneratedColumn)('increment'),
+    __metadata("design:type", Number)
 ], SensorReadingEntity.prototype, "id", void 0);
 __decorate([
     (0, typeorm_1.Column)({ type: 'decimal', precision: 5, scale: 2 }),
@@ -50,7 +50,7 @@ __decorate([
 ], SensorReadingEntity.prototype, "createdAt", void 0);
 __decorate([
     (0, typeorm_1.Column)(),
-    __metadata("design:type", String)
+    __metadata("design:type", Number)
 ], SensorReadingEntity.prototype, "plantId", void 0);
 __decorate([
     (0, typeorm_1.ManyToOne)(() => plant_entity_1.PlantEntity, (plant) => plant.sensorReadings, {

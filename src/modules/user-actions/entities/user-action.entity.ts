@@ -15,8 +15,8 @@ import { EntityEnums } from 'src/common/enums/entity-name.enum';
 
 @Entity(EntityEnums.UserActions)
 export class UserActionEntity {
-  @PrimaryGeneratedColumn('uuid')
-  id: string;
+  @PrimaryGeneratedColumn('increment')
+  id: number;
 
   @Column({
     type: 'enum',
@@ -38,12 +38,12 @@ export class UserActionEntity {
   plant: PlantEntity;
 
   @Column()
-  plantId: string;
+  plantId: number;
 
   @ManyToOne(() => UserEntity, { onDelete: 'CASCADE' })
   @JoinColumn({ name: 'userId' })
   user: UserEntity;
 
   @Column()
-  userId: string;
+  userId: number;
 }

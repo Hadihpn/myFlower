@@ -36,13 +36,13 @@ export class PlantsController {
 
   @Get(':id')
   @ApiOperation({ summary: 'Get plant by ID' })
-  async findOne(@Request() req, @Param('id') id: string) {
+  async findOne(@Request() req, @Param('id') id: number) {
     return await this.plantsService.findOne(id, req.user.id);
   }
 
   @Get(':id/statistics')
   @ApiOperation({ summary: 'Get plant statistics' })
-  async getStatistics(@Request() req, @Param('id') id: string) {
+  async getStatistics(@Request() req, @Param('id') id: number) {
     return await this.plantsService.getPlantStatistics(id, req.user.id);
   }
 
@@ -50,7 +50,7 @@ export class PlantsController {
   @ApiOperation({ summary: 'Update plant' })
   async update(
     @Request() req,
-    @Param('id') id: string,
+    @Param('id') id: number,
     @Body() updatePlantDto: UpdatePlantDto,
   ) {
     return await this.plantsService.update(id, req.user.id, updatePlantDto);
@@ -58,7 +58,7 @@ export class PlantsController {
 
   @Delete(':id')
   @ApiOperation({ summary: 'Delete plant' })
-  async remove(@Request() req, @Param('id') id: string) {
+  async remove(@Request() req, @Param('id') id: number) {
     await this.plantsService.remove(id, req.user.id);
     return { message: 'Plant deleted successfully' };
   }

@@ -17,7 +17,7 @@ export class PlantsService {
   ) {}
 
   async create(
-    userId: string,
+    userId: number,
     createPlantDto: CreatePlantDto,
   ): Promise<PlantEntity> {
     const { name, description, location, plantedDate, status, deviceId } =
@@ -40,21 +40,20 @@ export class PlantsService {
       deviceId,
       createdAt: new Date(),
       updatedAt: new Date(),
-
       userId,
     });
 
     return await this.plantsRepository.save(plant);
   }
 
-  async findAll(userId: string): Promise<PlantEntity[]> {
+  async findAll(userId: number): Promise<PlantEntity[]> {
     return await this.plantsRepository.find({
       where: { userId },
       order: { createdAt: 'DESC' },
     });
   }
 
-  async findOne(id: string, userId: string): Promise<PlantEntity> {
+  async findOne(id: number, userId: number): Promise<PlantEntity> {
     const plant = await this.plantsRepository.findOne({
       where: { id, userId },
       relations: ['sensorReadings'],
@@ -74,8 +73,8 @@ export class PlantsService {
   }
 
   async update(
-    id: string,
-    userId: string,
+    id: number,
+    userId: number,
     updatePlantDto: UpdatePlantDto,
   ): Promise<PlantEntity> {
     const plant = await this.findOne(id, userId);
@@ -95,12 +94,12 @@ export class PlantsService {
     return await this.plantsRepository.save(plant);
   }
 
-  async remove(id: string, userId: string): Promise<void> {
+  async remove(id: number, userId: number): Promise<void> {
     const plant = await this.findOne(id, userId);
     await this.plantsRepository.remove(plant);
   }
 
-  async getPlantStatistics(plantId: string, userId: string) {
+  async getPlantStatistics(plantId: number, userId: number) {
     const plant = await this.findOne(plantId, userId);
 
     // Get readings from last 7 days

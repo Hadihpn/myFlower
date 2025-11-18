@@ -1,11 +1,11 @@
 import { PlantEntity } from 'src/modules/plants/entities/plant.entity';
 export declare class SensorReadingEntity {
-    id: string;
+    id: number;
     temperature: number;
     moisture: number;
     light: number;
     timestamp: Date;
     createdAt: Date;
-    plantId: string;
+    plantId: number;
     plant: PlantEntity;
 }

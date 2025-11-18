@@ -32,7 +32,7 @@ export class SensorReadingsController {
   @ApiOperation({ summary: 'Get sensor readings for a plant' })
   async findByPlant(
     @Request() req,
-    @Param('plantId') plantId: string,
+    @Param('plantId') plantId: number,
     @Query('limit') limit?: number,
   ) {
     return await this.sensorReadingsService.findByPlant(
@@ -46,7 +46,7 @@ export class SensorReadingsController {
   @UserAuth()
   @ApiBearerAuth()
   @ApiOperation({ summary: 'Get latest sensor reading for a plant' })
-  async getLatest(@Request() req, @Param('plantId') plantId: string) {
+  async getLatest(@Request() req, @Param('plantId') plantId: number) {
     return await this.sensorReadingsService.getLatestReading(
       plantId,
       req.user.id,
@@ -60,7 +60,7 @@ export class SensorReadingsController {
   @ApiOperation({ summary: 'Get daily aggregates for a plant' })
   async getDailyAggregates(
     @Request() req,
-    @Param('plantId') plantId: string,
+    @Param('plantId') plantId: number,
     @Query('days') days?: number,
   ) {
     return await this.sensorReadingsService.getDailyAggregates(

@@ -32,7 +32,7 @@ let PlantEntity = class PlantEntity {
 exports.PlantEntity = PlantEntity;
 __decorate([
     (0, typeorm_1.PrimaryGeneratedColumn)('increment'),
-    __metadata("design:type", String)
+    __metadata("design:type", Number)
 ], PlantEntity.prototype, "id", void 0);
 __decorate([
     (0, typeorm_1.Column)(),
@@ -77,7 +77,7 @@ __decorate([
 ], PlantEntity.prototype, "user", void 0);
 __decorate([
     (0, typeorm_1.Column)(),
-    __metadata("design:type", String)
+    __metadata("design:type", Number)
 ], PlantEntity.prototype, "userId", void 0);
 __decorate([
     (0, typeorm_1.OneToMany)(() => sensor_reading_entity_1.SensorReadingEntity, (reading) => reading.plant),

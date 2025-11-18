@@ -7,9 +7,9 @@ export declare class SensorReadingsService {
     private plantsService;
     constructor(sensorReadingsRepository: Repository<SensorReadingEntity>, plantsService: PlantsService);
     create(createSensorReadingDto: CreateSensorReadingDto): Promise<SensorReadingEntity>;
-    findByPlant(plantId: string, userId: string, limit?: number): Promise<SensorReadingEntity[]>;
-    findByDateRange(plantId: string, userId: string, startDate: Date, endDate: Date): Promise<SensorReadingEntity[]>;
-    getDailyAggregates(plantId: string, userId: string, days?: number): Promise<{
+    findByPlant(plantId: number, userId: number, limit?: number): Promise<SensorReadingEntity[]>;
+    findByDateRange(plantId: number, userId: number, startDate: Date, endDate: Date): Promise<SensorReadingEntity[]>;
+    getDailyAggregates(plantId: number, userId: number, days?: number): Promise<{
         date: any;
         temperature: {
             avg: number;
@@ -28,5 +28,5 @@ export declare class SensorReadingsService {
         };
         readingsCount: number;
     }[]>;
-    getLatestReading(plantId: string, userId: string): Promise<SensorReadingEntity>;
+    getLatestReading(plantId: number, userId: number): Promise<SensorReadingEntity>;
 }

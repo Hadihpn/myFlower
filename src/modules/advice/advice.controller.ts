@@ -12,7 +12,7 @@ export class AdviceController {
 
   @Get('plant/:plantId')
   @ApiOperation({ summary: 'Get care advice for a plant' })
-  async getAdvice(@Request() req, @Param('plantId') plantId: string) {
+  async getAdvice(@Request() req, @Param('plantId') plantId: number) {
     return await this.adviceService.getAdviceForPlant(plantId, req.user.id);
   }
 }
