@@ -54,8 +54,7 @@ export class SensorReadingsController {
   }
 
   @Get('plant/:plantId/daily')
-    @UserAuth()
-
+  @UserAuth()
   @ApiBearerAuth()
   @ApiOperation({ summary: 'Get daily aggregates for a plant' })
   async getDailyAggregates(

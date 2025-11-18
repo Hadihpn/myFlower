@@ -2,6 +2,9 @@ export function isBoolean(value: any) {
   return ['true', true, 'false', false].includes(value);
 }
 export function toBoolean(value: any) {
-    return [true,'true'].includes(value)?true:[false,"false"].includes(value)?false:value;
+  return [true, 'true'].includes(value)
+    ? true
+    : [false, 'false'].includes(value)
+      ? false
+      : value;
 }
-

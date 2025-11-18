@@ -6,12 +6,10 @@ import {
   ManyToOne,
   JoinColumn,
 } from 'typeorm';
-import { PlantEntity } from 'src/modules/plants/entities/plant.entity';
-import { UserEntity } from 'src/modules/users/entities/user.entity';
+import { PlantEntity } from '../../plants/entities/plant.entity';
+import { UserEntity } from '../../users/entities/user.entity';
 import { ActionType } from '../enum/user-actions.enum';
-import { EntityEnums } from 'src/common/enums/entity-name.enum';
-
-
+import { EntityEnums } from '../../../common/enums/entity-name.enum';
 
 @Entity(EntityEnums.UserActions)
 export class UserActionEntity {

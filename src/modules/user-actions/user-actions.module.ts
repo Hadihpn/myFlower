@@ -8,8 +8,11 @@ import { PlantsService } from '../plants/plants.service';
 import { AuthModule } from '../auth/auth.module';
 
 @Module({
-  imports: [AuthModule,TypeOrmModule.forFeature([UserActionEntity,PlantEntity])],
+  imports: [
+    AuthModule,
+    TypeOrmModule.forFeature([UserActionEntity, PlantEntity]),
+  ],
   controllers: [UserActionsController],
-  providers: [UserActionsService,PlantsService],
+  providers: [UserActionsService, PlantsService],
 })
 export class UserActionsModule {}

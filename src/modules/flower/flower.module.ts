@@ -1,6 +1,6 @@
 import { Module } from '@nestjs/common';
-import { FlowerService,  } from './flower.service';
-import { FlowerController  } from './flower.controller';
+import { FlowerService } from './flower.service';
+import { FlowerController } from './flower.controller';
 import { TypeOrmModule } from '@nestjs/typeorm';
 
 @Module({

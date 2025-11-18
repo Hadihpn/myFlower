@@ -1,5 +1,5 @@
-import { PlantEntity } from 'src/modules/plants/entities/plant.entity';
-import { UserEntity } from 'src/modules/users/entities/user.entity';
+import { PlantEntity } from '../../plants/entities/plant.entity';
+import { UserEntity } from '../../users/entities/user.entity';
 import { ActionType } from '../enum/user-actions.enum';
 export declare class UserActionEntity {
     id: number;

@@ -4,7 +4,6 @@ import { PlantsService } from '../plants/plants.service';
 import { SensorReadingsService } from '../sensor-readings/sensor-readings.service';
 import { UserActionsService } from '../user-actions/user-actions.service';
 
-
 @Injectable()
 export class AdviceService {
   private readonly plantThresholds = {
@@ -138,7 +137,8 @@ export class AdviceService {
     if (!oneHourAgo) return advice;
 
     // Temperature sudden drop (frost risk)
-    const tempDrop = Number(oneHourAgo.temperature) - Number(latest.temperature);
+    const tempDrop =
+      Number(oneHourAgo.temperature) - Number(latest.temperature);
     if (tempDrop >= 5) {
       advice.push({
         type: 'critical',
@@ -150,7 +150,8 @@ export class AdviceService {
     }
 
     // Temperature sudden spike (heat stress)
-    const tempSpike = Number(latest.temperature) - Number(oneHourAgo.temperature);
+    const tempSpike =
+      Number(latest.temperature) - Number(oneHourAgo.temperature);
     if (tempSpike >= 5) {
       advice.push({
         type: 'critical',
@@ -371,19 +372,22 @@ export class AdviceService {
     const advice: AdviceItem[] = [];
 
     // Moisture trend
-    const moistureDiff = statistics.moisture.average - statistics.moisture.current;
+    const moistureDiff =
+      statistics.moisture.average - statistics.moisture.current;
     if (moistureDiff > 10) {
       advice.push({
         type: 'info',
         category: 'moisture',
-        message: 'Moisture levels are below recent average. May need more frequent watering.',
+        message:
+          'Moisture levels are below recent average. May need more frequent watering.',
         priority: 2,
       });
     } else if (moistureDiff < -10) {
       advice.push({
         type: 'info',
         category: 'moisture',
-        message: 'Moisture levels are higher than usual. Monitor for overwatering.',
+        message:
+          'Moisture levels are higher than usual. Monitor for overwatering.',
         priority: 2,
       });
     }

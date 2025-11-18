@@ -7,11 +7,19 @@ import { Repository } from 'typeorm';
 
 @Injectable()
 export class UserService {
-  constructor(@InjectRepository(UserEntity) private userRepository:Repository<UserEntity>){}
+  constructor(
+    @InjectRepository(UserEntity)
+    private userRepository: Repository<UserEntity>,
+  ) {}
 
-async create(userDto: Partial<UserEntity>): Promise<UserEntity> {
-  const {email,fullName,password,phone} = userDto
-    const user = this.userRepository.create({email,fullName,password,phone});
+  async create(userDto: Partial<UserEntity>): Promise<UserEntity> {
+    const { email, fullName, password, phone } = userDto;
+    const user = this.userRepository.create({
+      email,
+      fullName,
+      password,
+      phone,
+    });
     return await this.userRepository.save(user);
   }
 
@@ -19,10 +27,8 @@ async create(userDto: Partial<UserEntity>): Promise<UserEntity> {
     return await this.userRepository.findOne({ where: { email } });
   }
   async findById(id: number): Promise<UserEntity | null> {
-    return await this.userRepository.findOneBy({id})
+    return await this.userRepository.findOneBy({ id });
   }
-
-
 
   findAll() {
     return `This action returns all user`;
@@ -31,7 +37,6 @@ async create(userDto: Partial<UserEntity>): Promise<UserEntity> {
   findOne(id: number) {
     return `This action returns a #${id} user`;
   }
-
 
   update(id: number, updateUserDto: UpdateUserDto) {
     return `This action updates a #${id} user`;

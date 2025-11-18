@@ -9,8 +9,8 @@ namespace NodeJS {
     DATABASE_USERNAME: string;
     DATABASE_PASSWORD: string;
     // JWT
-    JWT_SECRET:string;
-    JWT_EXPIRATIO:string;
+    JWT_SECRET: string;
+    JWT_EXPIRATIO: string;
     //secrets
     COOKIE_SECRET: string;
     OTP_TOKEN_SECRET: string;
@@ -27,7 +27,7 @@ namespace NodeJS {
     S3_SECRET_KEY: string;
     S3_BUCKET_NAME: string;
     S3_ENDPOINT_NAME: string;
-     //Secret
+    //Secret
     ACCESS_TOKEN_SECRET: string;
     REFRESH_TOKEN_SECRET: string;
     OTP_TOKEN_SECRET: string;

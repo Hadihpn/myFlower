@@ -1,3 +1,3 @@
 export type PayloadType = {
-    id: number
-}
+  id: number;
+};

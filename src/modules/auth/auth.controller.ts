@@ -1,8 +1,5 @@
 import { Body, Controller, Post } from '@nestjs/common';
-import {
-  CheckOtpDto,
-  SendOtpDto,
-} from './dto/otp.dto';
+import { CheckOtpDto, SendOtpDto } from './dto/otp.dto';
 import { ApiConsumes, ApiTags } from '@nestjs/swagger';
 import { RegisterDto } from './dto/register.dto';
 import { FormType } from 'src/common/enums/form-type.enum';
@@ -28,10 +25,9 @@ export class AuthController {
   forgetPassword(@Body() otpDto: CheckOtpDto) {
     // return this.authService.checkOtp(otpDto);
   }
- @Post('/check-otp')
+  @Post('/check-otp')
   @ApiConsumes(FormType.UrlEncoded, FormType.JSON)
   checkOtp(@Body() otpDto: CheckOtpDto) {
     // return this.authService.checkOtp(otpDto);
   }
-
 }

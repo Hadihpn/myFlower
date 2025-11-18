@@ -9,7 +9,10 @@ import { ApiProperty } from '@nestjs/swagger';
 
 export class RegisterDto {
   @ApiProperty({ example: 'YourEmail@example.com' })
-  @IsEmail({}, {message: " ایمیل وارد شده صحیح نمیباشد.مطابق نمونه وارد نمایید"})
+  @IsEmail(
+    {},
+    { message: ' ایمیل وارد شده صحیح نمیباشد.مطابق نمونه وارد نمایید' },
+  )
   email: string;
 
   @ApiProperty({ example: 'SecurePass123!' })

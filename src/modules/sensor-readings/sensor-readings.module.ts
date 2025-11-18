@@ -8,8 +8,11 @@ import { PlantsService } from '../plants/plants.service';
 import { PlantEntity } from '../plants/entities/plant.entity';
 
 @Module({
-  imports:[AuthModule,TypeOrmModule.forFeature([SensorReadingEntity,PlantEntity])],
+  imports: [
+    AuthModule,
+    TypeOrmModule.forFeature([SensorReadingEntity, PlantEntity]),
+  ],
   controllers: [SensorReadingsController],
-  providers: [SensorReadingsService,PlantsService],
+  providers: [SensorReadingsService, PlantsService],
 })
 export class SensorReadingsModule {}

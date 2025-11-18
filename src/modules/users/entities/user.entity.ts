@@ -22,10 +22,10 @@ export class UserEntity {
   @Exclude()
   password: string;
 
-  @Column({nullable:true})
+  @Column({ nullable: true })
   fullName: string;
 
-  @Column({nullable:true})
+  @Column({ nullable: true })
   phone: string;
 
   @CreateDateColumn()

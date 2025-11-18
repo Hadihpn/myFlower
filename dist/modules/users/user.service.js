@@ -24,7 +24,12 @@ let UserService = class UserService {
     }
     async create(userDto) {
         const { email, fullName, password, phone } = userDto;
-        const user = this.userRepository.create({ email, fullName, password, phone });
+        const user = this.userRepository.create({
+            email,
+            fullName,
+            password,
+            phone,
+        });
         return await this.userRepository.save(user);
     }
     async findByEmail(email) {

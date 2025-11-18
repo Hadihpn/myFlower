@@ -50,19 +50,22 @@ export class AuthService {
     };
   }
 
-  async login(loginDto: LoginDto){
+  async login(loginDto: LoginDto) {
     let { email, password } = loginDto;
     const now = new Date();
     const user = await this.userService.findByEmail(email);
     if (!user)
       throw new UnauthorizedException('اطلاعات وارد شده صحیح نمیباشد.');
-    if (password.toString().trim() !== "")
+    if (password.toString().trim() !== '')
       throw new UnauthorizedException('پسورد را وارد نمایید');
     if (!user.password) {
       // Hash password
       password = await bcrypt.hashSync(password, 10);
       //compare password
-      if(!bcrypt.compareSync(password, user.password)) throw new UnauthorizedException('نام کاربری و رمز وارد شده مطابقت ندارد');
+      if (!bcrypt.compareSync(password, user.password))
+        throw new UnauthorizedException(
+          'نام کاربری و رمز وارد شده مطابقت ندارد',
+        );
     }
 
     const { accessToken, refreshToken } = this.makeTokensForLogin({
@@ -78,14 +81,13 @@ export class AuthService {
   //#endregion
 
   async checkEmail(email: string) {
-    const user = await this.userService.findByEmail( email);
+    const user = await this.userService.findByEmail(email);
     if (user) throw new ConflictException('email is already exist');
   }
   // async checkMobile(mobile: string) {
   //   const user = await this.userRepository.findOneBy({ mobile });
   //   if (user) throw new ConflictException('mobile number is already exist');
   // }
-  
 
   makeTokensForLogin(payload: PayloadType) {
     const accessToken = this.jwtService.sign(payload, {
@@ -107,7 +109,7 @@ export class AuthService {
         secret: process.env.ACCESS_TOKEN_SECRET,
       });
       if (typeof payload === 'object' && payload?.id) {
-        const user = await this.userService.findById(payload.id );
+        const user = await this.userService.findById(payload.id);
         if (!user) {
           throw new UnauthorizedException('login on your account ');
         }

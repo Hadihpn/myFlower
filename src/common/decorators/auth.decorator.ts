@@ -5,4 +5,3 @@ import { AuthGuard } from 'src/modules/auth/guards/auth.guard';
 export function UserAuth() {
   return applyDecorators(ApiBearerAuth('Authorization'), UseGuards(AuthGuard));
 }
-

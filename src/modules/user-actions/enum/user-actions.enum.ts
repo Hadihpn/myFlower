@@ -1,3 +1,4 @@
+
 export enum ActionType {
   WATERED = 'watered',
   FERTILIZED = 'fertilized',

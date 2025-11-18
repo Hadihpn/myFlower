@@ -4,12 +4,10 @@ import { Repository } from 'typeorm';
 
 @Injectable()
 export class FlowerService {
-  constructor(
-   
-  ) {}
+  constructor() {}
   //createUserDto is same as sendOtpDto . so use sameSendOtpDto
   async create(getData: any) {
-    console.log(getData)
+    console.log(getData);
     return getData;
   }
 }

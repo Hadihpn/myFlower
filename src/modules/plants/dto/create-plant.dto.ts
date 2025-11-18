@@ -30,5 +30,4 @@ export class CreatePlantDto {
   @ApiProperty()
   @IsString()
   deviceId: string;
-  
 }

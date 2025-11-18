@@ -11,8 +11,20 @@ import { UserActionEntity } from '../user-actions/entities/user-action.entity';
 import { SensorReadingEntity } from '../sensor-readings/entities/sensor-reading.entity';
 
 @Module({
-  imports: [AuthModule,TypeOrmModule.forFeature([PlantEntity,SensorReadingEntity,UserActionEntity])],
+  imports: [
+    AuthModule,
+    TypeOrmModule.forFeature([
+      PlantEntity,
+      SensorReadingEntity,
+      UserActionEntity,
+    ]),
+  ],
   controllers: [AdviceController],
-  providers: [AdviceService,PlantsService ,UserActionsService,SensorReadingsService],
+  providers: [
+    AdviceService,
+    PlantsService,
+    UserActionsService,
+    SensorReadingsService,
+  ],
 })
 export class AdviceModule {}

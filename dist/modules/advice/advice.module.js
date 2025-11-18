@@ -23,9 +23,21 @@ let AdviceModule = class AdviceModule {
 exports.AdviceModule = AdviceModule;
 exports.AdviceModule = AdviceModule = __decorate([
     (0, common_1.Module)({
-        imports: [auth_module_1.AuthModule, typeorm_1.TypeOrmModule.forFeature([plant_entity_1.PlantEntity, sensor_reading_entity_1.SensorReadingEntity, user_action_entity_1.UserActionEntity])],
+        imports: [
+            auth_module_1.AuthModule,
+            typeorm_1.TypeOrmModule.forFeature([
+                plant_entity_1.PlantEntity,
+                sensor_reading_entity_1.SensorReadingEntity,
+                user_action_entity_1.UserActionEntity,
+            ]),
+        ],
         controllers: [advice_controller_1.AdviceController],
-        providers: [advice_service_1.AdviceService, plants_service_1.PlantsService, user_actions_service_1.UserActionsService, sensor_readings_service_1.SensorReadingsService],
+        providers: [
+            advice_service_1.AdviceService,
+            plants_service_1.PlantsService,
+            user_actions_service_1.UserActionsService,
+            sensor_readings_service_1.SensorReadingsService,
+        ],
     })
 ], AdviceModule);
 //# sourceMappingURL=advice.module.js.map

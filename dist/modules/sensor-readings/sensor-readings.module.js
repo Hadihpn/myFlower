@@ -20,7 +20,10 @@ let SensorReadingsModule = class SensorReadingsModule {
 exports.SensorReadingsModule = SensorReadingsModule;
 exports.SensorReadingsModule = SensorReadingsModule = __decorate([
     (0, common_1.Module)({
-        imports: [auth_module_1.AuthModule, typeorm_1.TypeOrmModule.forFeature([sensor_reading_entity_1.SensorReadingEntity, plant_entity_1.PlantEntity])],
+        imports: [
+            auth_module_1.AuthModule,
+            typeorm_1.TypeOrmModule.forFeature([sensor_reading_entity_1.SensorReadingEntity, plant_entity_1.PlantEntity]),
+        ],
         controllers: [sensor_readings_controller_1.SensorReadingsController],
         providers: [sensor_readings_service_1.SensorReadingsService, plants_service_1.PlantsService],
     })

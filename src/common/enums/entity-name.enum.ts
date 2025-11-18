@@ -3,5 +3,5 @@ export enum EntityEnums {
   Plant = 'plant',
   PlantType = 'plant_type',
   SensorReadings = 'sensor_readings',
-  UserActions='user_actions'
+  UserActions = 'user_actions',
 }

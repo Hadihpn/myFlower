@@ -20,7 +20,10 @@ let UserActionsModule = class UserActionsModule {
 exports.UserActionsModule = UserActionsModule;
 exports.UserActionsModule = UserActionsModule = __decorate([
     (0, common_1.Module)({
-        imports: [auth_module_1.AuthModule, typeorm_1.TypeOrmModule.forFeature([user_action_entity_1.UserActionEntity, plant_entity_1.PlantEntity])],
+        imports: [
+            auth_module_1.AuthModule,
+            typeorm_1.TypeOrmModule.forFeature([user_action_entity_1.UserActionEntity, plant_entity_1.PlantEntity]),
+        ],
         controllers: [user_actions_controller_1.UserActionsController],
         providers: [user_actions_service_1.UserActionsService, plants_service_1.PlantsService],
     })

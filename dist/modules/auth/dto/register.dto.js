@@ -21,7 +21,7 @@ class RegisterDto {
 exports.RegisterDto = RegisterDto;
 __decorate([
     (0, swagger_1.ApiProperty)({ example: 'YourEmail@example.com' }),
-    (0, class_validator_1.IsEmail)({}, { message: " ایمیل وارد شده صحیح نمیباشد.مطابق نمونه وارد نمایید" }),
+    (0, class_validator_1.IsEmail)({}, { message: ' ایمیل وارد شده صحیح نمیباشد.مطابق نمونه وارد نمایید' }),
     __metadata("design:type", String)
 ], RegisterDto.prototype, "email", void 0);
 __decorate([

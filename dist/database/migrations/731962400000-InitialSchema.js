@@ -1,11 +1,11 @@
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.InitialSchema = void 0;
-class InitialSchema {
-    name = 'InitialSchema';
+exports.InitialSchema1731962400000 = void 0;
+class InitialSchema1731962400000 {
+    name = 'InitialSchema1731962400000';
     async up(queryRunner) {
         await queryRunner.query(`
-      CREATE TABLE "users" (
+      CREATE TABLE "user" (
         "id" SERIAL NOT NULL,
         "email" character varying NOT NULL,
         "password" character varying NOT NULL,
@@ -14,11 +14,11 @@ class InitialSchema {
         "createdAt" TIMESTAMP NOT NULL DEFAULT now(),
         "updatedAt" TIMESTAMP NOT NULL DEFAULT now(),
         CONSTRAINT "UQ_user_email" UNIQUE ("email"),
-        CONSTRAINT "PK_users" PRIMARY KEY ("id")
+        CONSTRAINT "PK_user" PRIMARY KEY ("id")
       )
     `);
         await queryRunner.query(`
-      CREATE TABLE "plants" (
+      CREATE TABLE "plant" (
        "id" SERIAL NOT NULL,
         "name" character varying NOT NULL,
         "species" character varying NOT NULL,
@@ -31,7 +31,7 @@ class InitialSchema {
         "createdAt" TIMESTAMP NOT NULL DEFAULT now(),
         "updatedAt" TIMESTAMP NOT NULL DEFAULT now(),
         CONSTRAINT "UQ_plant_deviceId" UNIQUE ("deviceId"),
-        CONSTRAINT "PK_plants" PRIMARY KEY ("id")
+        CONSTRAINT "PK_plant" PRIMARY KEY ("id")
       )
     `);
         await queryRunner.query(`
@@ -65,27 +65,27 @@ class InitialSchema {
       )
     `);
         await queryRunner.query(`
-      ALTER TABLE "plants" 
-      ADD CONSTRAINT "FK_plants_userId" 
-      FOREIGN KEY ("userId") REFERENCES "users"("id") 
+      ALTER TABLE "plant" 
+      ADD CONSTRAINT "FK_plant_userId" 
+      FOREIGN KEY ("userId") REFERENCES "user"("id") 
       ON DELETE CASCADE ON UPDATE NO ACTION
     `);
         await queryRunner.query(`
       ALTER TABLE "sensor_readings" 
       ADD CONSTRAINT "FK_sensor_readings_plantId" 
-      FOREIGN KEY ("plantId") REFERENCES "plants"("id") 
+      FOREIGN KEY ("plantId") REFERENCES "plant"("id") 
       ON DELETE CASCADE ON UPDATE NO ACTION
     `);
         await queryRunner.query(`
       ALTER TABLE "user_actions" 
       ADD CONSTRAINT "FK_user_actions_plantId" 
-      FOREIGN KEY ("plantId") REFERENCES "plants"("id") 
+      FOREIGN KEY ("plantId") REFERENCES "plant"("id") 
       ON DELETE CASCADE ON UPDATE NO ACTION
     `);
         await queryRunner.query(`
       ALTER TABLE "user_actions" 
       ADD CONSTRAINT "FK_user_actions_userId" 
-      FOREIGN KEY ("userId") REFERENCES "users"("id") 
+      FOREIGN KEY ("userId") REFERENCES "user"("id") 
       ON DELETE CASCADE ON UPDATE NO ACTION
     `);
         await queryRunner.query(`
@@ -97,24 +97,24 @@ class InitialSchema {
       ON "user_actions" ("plantId")
     `);
         await queryRunner.query(`
-      CREATE INDEX "IDX_plants_userId" 
-      ON "plants" ("userId")
+      CREATE INDEX "IDX_plant_userId" 
+      ON "plant" ("userId")
     `);
     }
     async down(queryRunner) {
-        await queryRunner.query(`DROP INDEX "IDX_plants_userId"`);
+        await queryRunner.query(`DROP INDEX "IDX_plant_userId"`);
         await queryRunner.query(`DROP INDEX "IDX_user_actions_plantId"`);
         await queryRunner.query(`DROP INDEX "IDX_sensor_readings_plantId_timestamp"`);
         await queryRunner.query(`ALTER TABLE "user_actions" DROP CONSTRAINT "FK_user_actions_userId"`);
         await queryRunner.query(`ALTER TABLE "user_actions" DROP CONSTRAINT "FK_user_actions_plantId"`);
         await queryRunner.query(`ALTER TABLE "sensor_readings" DROP CONSTRAINT "FK_sensor_readings_plantId"`);
-        await queryRunner.query(`ALTER TABLE "plants" DROP CONSTRAINT "FK_plants_userId"`);
+        await queryRunner.query(`ALTER TABLE "plant" DROP CONSTRAINT "FK_plant_userId"`);
         await queryRunner.query(`DROP TABLE "user_actions"`);
         await queryRunner.query(`DROP TYPE "user_actions_actiontype_enum"`);
         await queryRunner.query(`DROP TABLE "sensor_readings"`);
-        await queryRunner.query(`DROP TABLE "plants"`);
-        await queryRunner.query(`DROP TABLE "users"`);
+        await queryRunner.query(`DROP TABLE "plant"`);
+        await queryRunner.query(`DROP TABLE "user"`);
     }
 }
-exports.InitialSchema = InitialSchema;
-//# sourceMappingURL=initialSchemas.js.map
+exports.InitialSchema1731962400000 = InitialSchema1731962400000;
+//# sourceMappingURL=731962400000-InitialSchema.js.map

@@ -34,12 +34,12 @@ let AuthGuard = class AuthGuard {
     }
     extractToken(request) {
         const { authorization } = request.headers;
-        if (!authorization || authorization?.trim() == "") {
-            throw new common_1.UnauthorizedException("Login on your account");
+        if (!authorization || authorization?.trim() == '') {
+            throw new common_1.UnauthorizedException('Login on your account');
         }
-        const [bearer, token] = authorization?.split(" ");
-        if (bearer?.toLowerCase() !== "bearer" || !token || !(0, class_validator_1.isJWT)(token))
-            throw new common_1.UnauthorizedException("Login on your account");
+        const [bearer, token] = authorization?.split(' ');
+        if (bearer?.toLowerCase() !== 'bearer' || !token || !(0, class_validator_1.isJWT)(token))
+            throw new common_1.UnauthorizedException('Login on your account');
         return token;
     }
 };

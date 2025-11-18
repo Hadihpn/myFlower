@@ -5,13 +5,13 @@ import { SwaggerConfigInit } from './config/swagger.config';
 
 async function bootstrap() {
   const app = await NestFactory.create(AppModule);
-    // Enable CORS for frontend
+  // Enable CORS for frontend
   app.enableCors({
     origin: ['http://localhost:3001', 'http://localhost:3000'], // Add your frontend URLs
     credentials: true,
   });
-  
-    // Global validation pipe
+
+  // Global validation pipe
   app.useGlobalPipes(
     new ValidationPipe({
       whitelist: true, // Strip unknown properties
@@ -21,9 +21,9 @@ async function bootstrap() {
   );
   // API prefix
   app.setGlobalPrefix('api');
-  SwaggerConfigInit(app)
-  
-  await app.listen(process.env.PORT ?? 3000,()=>{
+  SwaggerConfigInit(app);
+
+  await app.listen(process.env.PORT ?? 3000, () => {
     console.log(`
     🌱 Plant Maintenance API is running!
     
