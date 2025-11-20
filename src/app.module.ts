@@ -12,6 +12,7 @@ import { SensorReadingsModule } from './modules/sensor-readings/sensor-readings.
 import { getDatabaseConfig } from './config/db.config';
 import { AdviceModule } from './modules/advice/advice.module';
 import { UserActionsModule } from './modules/user-actions/user-actions.module';
+import { HealthModule } from './health/health.module';
 
 @Module({
   imports: [
@@ -30,6 +31,7 @@ import { UserActionsModule } from './modules/user-actions/user-actions.module';
     SensorReadingsModule,
     AdviceModule,
     UserActionsModule,
+    HealthModule
   ],
   controllers: [AppController],
   providers: [AppService],
