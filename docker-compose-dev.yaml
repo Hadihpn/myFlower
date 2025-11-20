@@ -1,0 +1,48 @@
+version: '3.8'
+
+services:
+  postgres:
+    image: postgres:15-alpine
+    container_name: plant_db_dev
+    restart: unless-stopped
+    environment:
+      POSTGRES_USER: plant_user
+      POSTGRES_PASSWORD: plant_password
+      POSTGRES_DB: plant_maintenance
+    ports:
+      - '5432:5432'
+    volumes:
+      - postgres_data_dev:/var/lib/postgresql/data
+
+  pgadmin:
+    image: dpage/pgadmin4:latest
+    container_name: plant_pgadmin_dev
+    restart: unless-stopped
+    environment:
+      PGADMIN_DEFAULT_EMAIL: admin@plant.com
+      PGADMIN_DEFAULT_PASSWORD: admin123
+    ports:
+      - '5050:80'
+    depends_on:
+      - postgres
+
+volumes:
+  postgres_data_dev:
+
+
+# .dockerignore
+
+# node_modules
+# npm-debug.log
+# dist
+# .env
+# .env.local
+# .git
+# .gitignore
+# README.md
+# .vscode
+# .idea
+# coverage
+# .nyc_output
+# logs
+# *.log
