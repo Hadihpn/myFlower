@@ -4,6 +4,7 @@ import { UpdateUserDto } from './dto/update-user.dto';
 import { InjectRepository } from '@nestjs/typeorm';
 import { UserEntity } from './entities/user.entity';
 import { Repository } from 'typeorm';
+import { log } from 'console';
 
 @Injectable()
 export class UserService {
@@ -14,13 +15,16 @@ export class UserService {
 
   async create(userDto: Partial<UserEntity>): Promise<UserEntity> {
     const { email, fullName, password, phone } = userDto;
-    const user = this.userRepository.create({
+    const user = await this.userRepository.create({
       email,
       fullName,
       password,
       phone,
     });
-    return await this.userRepository.save(user);
+
+    await this.userRepository.save(user);
+    console.log("user",user)
+    return user;
   }
 
   async findByEmail(email: string): Promise<UserEntity | null> {

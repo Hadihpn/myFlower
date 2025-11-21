@@ -34,13 +34,16 @@ export class AuthService {
     if (password.toString().trim() == '')
       throw new NotFoundException('لطفا پسورد صحیح را وارد نمایید');
     // Hash password
-    password = await bcrypt.hashSync(registerDto.password, 10);
+   let hashedPassword = await bcrypt.hash(registerDto.password, 10);
     let user = await this.userService.findByEmail(email);
     if (!user) {
       user = await this.userService.create({
         email,
-        password,
+        password:hashedPassword,
+        fullName: registerDto.fullName,
+        phone: registerDto.phone
       });
+      
     } else {
       throw new ConflictException('این ایمیل قبلا ثبت شده است');
     }
@@ -52,21 +55,32 @@ export class AuthService {
 
   async login(loginDto: LoginDto) {
     let { email, password } = loginDto;
-    const now = new Date();
-    const user = await this.userService.findByEmail(email);
-    if (!user)
+     // ✅ Check if email is empty
+  if (email.toString().trim() === '')
+    throw new UnauthorizedException('لطفا ایمیل صحیح را وارد نمایید');
+  // ✅ Check if password is empty (change !== to ===)
+    if (password.toString().trim() === '')
+    throw new UnauthorizedException('پسورد را وارد نمایید');
+
+  const user = await this.userService.findByEmail(email);
+  
+  if (!user)
       throw new UnauthorizedException('اطلاعات وارد شده صحیح نمیباشد.');
-    if (password.toString().trim() !== '')
+      // ✅  Check if password is empty
+    if (password.toString().trim() === '')
       throw new UnauthorizedException('پسورد را وارد نمایید');
-    if (!user.password) {
-      // Hash password
-      password = await bcrypt.hashSync(password, 10);
+     // ✅ Compare passwords correctly
+     // ✅ Compare passwords correctly
+       if (!user.password) {  // Changed logic - should be "if (user.password)"
+    throw new UnauthorizedException('پسورد برای این کاربر تنظیم نشده است');
+  }
       //compare password
-      if (!bcrypt.compareSync(password, user.password))
+      const isPasswordValid = await bcrypt.compare(password, user.password);
+
+      if (!isPasswordValid)
         throw new UnauthorizedException(
           'نام کاربری و رمز وارد شده مطابقت ندارد',
         );
-    }
 
     const { accessToken, refreshToken } = this.makeTokensForLogin({
       id: user.id,

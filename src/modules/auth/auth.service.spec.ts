@@ -49,16 +49,18 @@ describe('AuthService', () => {
     it('should successfully register a new user', async () => {
       const registerDto = {
         email: 'test@example.com',
-        password: 'password123',
+        password: 'hashedPassword',
         fullName: 'Test User',
+        phone: '09355864811',
       };
 
       const hashedPassword = 'hashedPassword';
       const createdUser = {
-        id: '123',
+        id: 1,
         email: registerDto.email,
         fullName: registerDto.fullName,
         password: hashedPassword,
+        phone: registerDto.phone,
       };
 
       mockUsersService.findByEmail.mockResolvedValue(null);
@@ -69,25 +71,22 @@ describe('AuthService', () => {
       const result = await service.register(registerDto);
 
       expect(usersService.findByEmail).toHaveBeenCalledWith(registerDto.email);
-      expect(bcrypt.hash).toHaveBeenCalledWith(registerDto.password, 10);
+      expect(await bcrypt.hash).toHaveBeenCalledWith(registerDto.password, 10);
       expect(usersService.create).toHaveBeenCalledWith({
-        ...registerDto,
+        email: registerDto.email,
         password: hashedPassword,
+        fullName: registerDto.fullName,
+        phone: registerDto.phone,
       });
       expect(result).toEqual({
-        user: {
-          id: createdUser.id,
-          email: createdUser.email,
-          fullName: createdUser.fullName,
-        },
-        token: 'jwt-token',
+        message: 'ثبت نام با موفقیت انجام شد',
       });
     });
 
     it('should throw ConflictException if email already exists', async () => {
       const registerDto = {
         email: 'existing@example.com',
-        password: 'password123',
+        password: 'hashedPassword',
         fullName: 'Test User',
       };
 
@@ -105,20 +104,25 @@ describe('AuthService', () => {
     it('should successfully login user with valid credentials', async () => {
       const loginDto = {
         email: 'test@example.com',
-        password: 'password123',
+        password: 'hashedPassword',
       };
 
       const user = {
-        id: '123',
+        id: 1,
         email: loginDto.email,
         fullName: 'Test User',
         password: 'hashedPassword',
       };
+      const mockAccessToken = 'mock-access-token';
+      const mockRefreshToken = 'mock-refresh-token';
 
       mockUsersService.findByEmail.mockResolvedValue(user);
       (bcrypt.compare as jest.Mock).mockResolvedValue(true);
-      mockJwtService.sign.mockReturnValue('jwt-token');
-
+      // ✅ Mock the JWT sign method
+      mockJwtService.sign.mockImplementation((payload, options) => {
+        if (options?.expiresIn === '30d') return mockAccessToken;
+        if (options?.expiresIn === '1y') return mockRefreshToken;
+      });
       const result = await service.login(loginDto);
 
       expect(usersService.findByEmail).toHaveBeenCalledWith(loginDto.email);
@@ -127,12 +131,9 @@ describe('AuthService', () => {
         user.password,
       );
       expect(result).toEqual({
-        user: {
-          id: user.id,
-          email: user.email,
-          fullName: user.fullName,
-        },
-        token: 'jwt-token',
+        accessToken: mockAccessToken, // ✅ Mock token
+        refreshToken: mockRefreshToken, // ✅ Mock token
+        message: 'شما با موفقیت وارد شدید',
       });
     });
 
@@ -157,7 +158,7 @@ describe('AuthService', () => {
       };
 
       const user = {
-        id: '123',
+        id: '1',
         email: loginDto.email,
         password: 'hashedPassword',
       };
