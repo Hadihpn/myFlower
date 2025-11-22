@@ -20,7 +20,7 @@ export class PlantsService {
     userId: number,
     createPlantDto: CreatePlantDto,
   ): Promise<PlantEntity> {
-    const { name, description, location, plantedDate, status, deviceId } =
+    const { name, description, location, plantedDate, status, deviceId,species } =
       createPlantDto;
     // Check if device ID already exists
     const existingPlant = await this.plantsRepository.findOne({
@@ -38,6 +38,7 @@ export class PlantsService {
       plantedDate,
       status,
       deviceId,
+      species,
       createdAt: new Date(),
       updatedAt: new Date(),
       userId,

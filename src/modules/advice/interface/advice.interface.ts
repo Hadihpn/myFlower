@@ -1,4 +1,4 @@
-interface AdviceItem {
+export interface AdviceItem {
   type: 'critical' | 'warning' | 'info' | 'success';
   category: 'temperature' | 'moisture' | 'light' | 'general' | 'care';
   message: string;

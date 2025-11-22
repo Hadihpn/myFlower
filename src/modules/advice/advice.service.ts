@@ -3,6 +3,7 @@ import { Injectable } from '@nestjs/common';
 import { PlantsService } from '../plants/plants.service';
 import { SensorReadingsService } from '../sensor-readings/sensor-readings.service';
 import { UserActionsService } from '../user-actions/user-actions.service';
+import { AdviceItem } from './interface/advice.interface';
 
 @Injectable()
 export class AdviceService {
@@ -51,6 +52,7 @@ export class AdviceService {
             category: 'general',
             message: 'No sensor data available yet. Waiting for first reading.',
             priority: 2,
+            actionRequired: false
           },
         ],
         overallHealth: 'unknown',
@@ -185,6 +187,7 @@ export class AdviceService {
         category: 'light',
         message: `Light intensity dropped significantly (weather change detected). Consider supplemental grow lights if cloudy conditions persist.`,
         priority: 2,
+        actionRequired: false
       });
     }
 
@@ -203,6 +206,7 @@ export class AdviceService {
         category: 'temperature',
         message: `Temperature is too low (${currentTemp}°C). Move to warmer location or add heat protection.`,
         priority: 1,
+        actionRequired: true,
       });
     } else if (currentTemp > thresholds.temperature.max) {
       advice.push({
@@ -210,6 +214,7 @@ export class AdviceService {
         category: 'temperature',
         message: `Temperature is too high (${currentTemp}°C). Provide shade or move to cooler location.`,
         priority: 1,
+        actionRequired: true,
       });
     } else if (
       currentTemp >= thresholds.temperature.ideal.min &&
@@ -220,6 +225,7 @@ export class AdviceService {
         category: 'temperature',
         message: `Temperature is ideal (${currentTemp}°C).`,
         priority: 3,
+        actionRequired: true,
       });
     }
 
@@ -250,6 +256,7 @@ export class AdviceService {
         category: 'moisture',
         message: `Soil moisture is perfect (${currentMoisture}%).`,
         priority: 3,
+        actionRequired: false,
       });
     }
 
@@ -261,6 +268,7 @@ export class AdviceService {
         category: 'light',
         message: `Light intensity is too low (${currentLight} lux). Move to brighter location or add grow lights.`,
         priority: 1,
+          actionRequired: true,
       });
     } else if (currentLight > thresholds.light.max) {
       advice.push({
@@ -268,6 +276,7 @@ export class AdviceService {
         category: 'light',
         message: `Light intensity is too high (${currentLight} lux). Provide shade to prevent leaf burn.`,
         priority: 1,
+        actionRequired: true
       });
     } else if (
       currentLight >= thresholds.light.ideal.min &&
@@ -278,6 +287,7 @@ export class AdviceService {
         category: 'light',
         message: `Light intensity is excellent (${currentLight} lux).`,
         priority: 3,
+        actionRequired: false,
       });
     }
 
@@ -289,7 +299,7 @@ export class AdviceService {
     plantId: number,
     userId: number,
     plant: any,
-  ) {
+  ) : Promise<AdviceItem[]>{
     const advice: AdviceItem[] = [];
 
     // Get recent user actions
@@ -319,6 +329,7 @@ export class AdviceService {
           category: 'care',
           message: `You last watered this plant ${daysSinceWatered} days ago. Check soil moisture regularly.`,
           priority: 2,
+          actionRequired: false
         });
       }
     }
@@ -339,6 +350,7 @@ export class AdviceService {
           category: 'care',
           message: `Last fertilized ${daysSinceFertilized} days ago. Consider fertilizing if plant is in active growth.`,
           priority: 2,
+          actionRequired: false
         });
       }
     } else if (plantAge >= 30) {
@@ -347,6 +359,7 @@ export class AdviceService {
         category: 'care',
         message: `No fertilization recorded. Consider adding nutrients for healthy growth.`,
         priority: 2,
+        actionRequired: false
       });
     }
 
@@ -361,6 +374,7 @@ export class AdviceService {
         category: 'care',
         message: `Plant is ${Math.floor(plantAge / 30)} months old. Consider refreshing soil or repotting if growth has slowed.`,
         priority: 3,
+        actionRequired: false
       });
     }
 
@@ -381,6 +395,7 @@ export class AdviceService {
         message:
           'Moisture levels are below recent average. May need more frequent watering.',
         priority: 2,
+        actionRequired: false
       });
     } else if (moistureDiff < -10) {
       advice.push({
@@ -389,6 +404,7 @@ export class AdviceService {
         message:
           'Moisture levels are higher than usual. Monitor for overwatering.',
         priority: 2,
+        actionRequired: false
       });
     }
 
