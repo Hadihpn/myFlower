@@ -4,6 +4,7 @@ import { ApiConsumes, ApiTags } from '@nestjs/swagger';
 import { RegisterDto } from './dto/register.dto';
 import { FormType } from 'src/common/enums/form-type.enum';
 import { AuthService } from './auth.service';
+import { LoginDto } from './dto/login.dto';
 
 @Controller('auth')
 @ApiTags('Auth')
@@ -17,8 +18,8 @@ export class AuthController {
   }
   @Post('/login')
   @ApiConsumes(FormType.UrlEncoded, FormType.JSON)
-  login(@Body() registerDto: RegisterDto) {
-    return this.authService.register(registerDto);
+  login(@Body() loginDto: LoginDto) {
+    return this.authService.login(loginDto);
   }
   @Post('/forget-password')
   @ApiConsumes(FormType.UrlEncoded, FormType.JSON)
