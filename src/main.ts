@@ -1,10 +1,16 @@
 import { NestFactory } from '@nestjs/core';
 import { AppModule } from './app.module';
-import { ValidationPipe } from '@nestjs/common';
+import { Logger, ValidationPipe } from '@nestjs/common';
 import { SwaggerConfigInit } from './config/swagger.config';
+import { WINSTON_MODULE_NEST_PROVIDER } from 'nest-winston';
 
 async function bootstrap() {
-  const app = await NestFactory.create(AppModule);
+  const app = await NestFactory.create(AppModule, {
+    bufferLogs: true, // Buffer logs until Winston is ready
+  });
+  // Use Winston logger
+  app.useLogger(app.get(WINSTON_MODULE_NEST_PROVIDER));
+   const logger = new Logger('Bootstrap');
   // Enable CORS for frontend
   app.enableCors({
     origin: ['http://localhost:3001', 'http://localhost:3000'], // Add your frontend URLs

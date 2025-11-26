@@ -8,10 +8,10 @@ const logDir = 'logs';
 const consoleFormat = winston.format.combine(
   winston.format.timestamp({ format: 'YYYY-MM-DD HH:mm:ss' }),
   winston.format.colorize(),
-  winston.format.printf(({ timestamp, level, message, context, trace }) => {
+  winston.format.printf(({ timestamp, level, message, context, stack }) => {
     const contextStr = context ? `[${context}]` : '';
-    const traceStr = trace ? `\n${trace}` : '';
-    return `${timestamp} ${level} ${contextStr} ${message}${traceStr}`;
+    const stackStr = stack ? `\n${stack}` : '';
+    return `${timestamp} ${level} ${contextStr} ${message}${stackStr}`;
   }),
 );
 

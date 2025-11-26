@@ -12,6 +12,7 @@ import { ApiTags, ApiOperation, ApiBearerAuth } from '@nestjs/swagger';
 import { SensorReadingsService } from './sensor-readings.service';
 import { CreateSensorReadingDto } from './dto/create-sensor-reading.dto';
 import { UserAuth } from 'src/common/decorators/auth.decorator';
+import { SkipThrottle, Throttle } from '@nestjs/throttler';
 
 @ApiTags('Sensor Readings')
 @Controller('sensor-readings')
@@ -22,6 +23,8 @@ export class SensorReadingsController {
   @ApiOperation({
     summary: 'Create sensor reading (from IoT device - no auth required)',
   })
+  @Throttle({ short: { limit: 100, ttl: 60000 } }) // IoT devices can send frequently
+ 
   async create(@Body() createSensorReadingDto: CreateSensorReadingDto) {
     return await this.sensorReadingsService.create(createSensorReadingDto);
   }
@@ -57,6 +60,7 @@ export class SensorReadingsController {
   @UserAuth()
   @ApiBearerAuth()
   @ApiOperation({ summary: 'Get daily aggregates for a plant' })
+   @SkipThrottle() // Skip rate limiting for reports
   async getDailyAggregates(
     @Request() req,
     @Param('plantId') plantId: number,

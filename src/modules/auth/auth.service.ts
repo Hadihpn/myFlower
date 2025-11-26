@@ -47,10 +47,19 @@ export class AuthService {
     } else {
       throw new ConflictException('این ایمیل قبلا ثبت شده است');
     }
-
-    return {
-      message: 'ثبت نام با موفقیت انجام شد',
-    };
+    
+// THIS should be returned:
+  return {
+    user: {
+      id: user.id,
+      email: user.email,
+      fullName: user.fullName,
+    },
+      // message: 'ثبت نام با موفقیت انجام شد',
+    token:"",
+  };
+    // return {
+    // };
   }
 
   async login(loginDto: LoginDto) {

@@ -15,13 +15,18 @@ import { UserActionsModule } from './modules/user-actions/user-actions.module';
 import { HealthModule } from './health/health.module';
 import { WinstonModule } from 'nest-winston';
 import { winstonConfig } from './config/logger.config';
-import { APP_FILTER } from '@nestjs/core';
+import { APP_FILTER, APP_GUARD, APP_INTERCEPTOR } from '@nestjs/core';
 import { AllExceptionsFilter } from './common/filters/all-exception.filter';
+import { ThrottlerModule } from '@nestjs/throttler';
+import { throttleConfig } from './config/throttle.config';
+import { CustomThrottlerGuard } from './common/guards/custom-throttler.guard';
+import { BusinessLogicInterceptor } from './common/interceptors/business-logic.interceptor';
+import { LoggingInterceptor } from './common/interceptors/logging.interceptor';
 
 @Module({
   imports: [
     ConfigModule.forRoot({
-      isGlobal:true,
+      isGlobal: true,
       envFilePath: join(process.cwd(), '.env'),
     }),
     TypeOrmModule.forRootAsync({
@@ -29,7 +34,10 @@ import { AllExceptionsFilter } from './common/filters/all-exception.filter';
       useFactory: getDatabaseConfig,
       inject: [ConfigService],
     }),
+    // Winston Logger
     WinstonModule.forRoot(winstonConfig),
+    // Rate Limiting
+    ThrottlerModule.forRoot(throttleConfig),
     // FlowerModule,
     AuthModule,
     UserModule,
@@ -37,17 +45,32 @@ import { AllExceptionsFilter } from './common/filters/all-exception.filter';
     SensorReadingsModule,
     AdviceModule,
     UserActionsModule,
-    HealthModule
+    HealthModule,
   ],
   controllers: [AppController],
-  providers: [AppService,// Global exception filter
+  providers: [
+    AppService, // Global exception filter
     {
       provide: APP_FILTER,
       useClass: AllExceptionsFilter,
     },
-],
+     // Global rate limiting
+    {
+      provide: APP_GUARD,
+      useClass: CustomThrottlerGuard,
+    },
+    // Global HTTP logging (logs all requests/responses automatically)
+    {
+      provide: APP_INTERCEPTOR,
+      useClass: LoggingInterceptor,
+    },
+    // Global business logic logging (logs important events automatically)
+    {
+      provide: APP_INTERCEPTOR,
+      useClass: BusinessLogicInterceptor,
+    },
+  ],
 })
 export class AppModule implements NestModule {
-  configure(consumer: MiddlewareConsumer) {
-  }
+  configure(consumer: MiddlewareConsumer) {}
 }

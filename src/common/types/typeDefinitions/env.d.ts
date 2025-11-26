@@ -31,5 +31,12 @@ namespace NodeJS {
     ACCESS_TOKEN_SECRET: string;
     REFRESH_TOKEN_SECRET: string;
     OTP_TOKEN_SECRET: string;
+
+    // Logging
+    LOG_LEVEL: string;
+
+    // Rate Limiting
+    THROTTLE_TTL: number;
+    THROTTLE_LIMIT: number;
   }
 }

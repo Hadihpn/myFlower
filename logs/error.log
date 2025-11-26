@@ -1,0 +1,1 @@
+{"context":"HTTP","level":"error","message":"❌ POST /api/auth/register 409 - 131ms - User: anonymous","stack":[null],"timestamp":"2025-11-26 19:56:27"}
