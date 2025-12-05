@@ -59,3 +59,61 @@
 {"context":"RoutesResolver","level":"info","message":"HealthController {/api/health}:","timestamp":"2025-11-26 23:07:35"}
 {"context":"RouterExplorer","level":"info","message":"Mapped {/api/health, GET} route","timestamp":"2025-11-26 23:07:35"}
 {"context":"NestApplication","level":"info","message":"Nest application successfully started","timestamp":"2025-11-26 23:07:35"}
+{"context":"NestFactory","level":"info","message":"Starting Nest application...","timestamp":"2025-12-05 20:17:42"}
+{"context":"InstanceLoader","level":"info","message":"TypeOrmModule dependencies initialized","timestamp":"2025-12-05 20:17:42"}
+{"context":"InstanceLoader","level":"info","message":"ConfigHostModule dependencies initialized","timestamp":"2025-12-05 20:17:42"}
+{"context":"InstanceLoader","level":"info","message":"WinstonModule dependencies initialized","timestamp":"2025-12-05 20:17:42"}
+{"context":"InstanceLoader","level":"info","message":"ThrottlerModule dependencies initialized","timestamp":"2025-12-05 20:17:42"}
+{"context":"InstanceLoader","level":"info","message":"ConfigModule dependencies initialized","timestamp":"2025-12-05 20:17:42"}
+{"context":"InstanceLoader","level":"info","message":"ConfigModule dependencies initialized","timestamp":"2025-12-05 20:17:42"}
+{"context":"InstanceLoader","level":"info","message":"TerminusModule dependencies initialized","timestamp":"2025-12-05 20:17:42"}
+{"context":"InstanceLoader","level":"info","message":"HealthModule dependencies initialized","timestamp":"2025-12-05 20:17:42"}
+{"context":"InstanceLoader","level":"info","message":"AppModule dependencies initialized","timestamp":"2025-12-05 20:17:42"}
+{"context":"InstanceLoader","level":"info","message":"TypeOrmCoreModule dependencies initialized","timestamp":"2025-12-05 20:17:42"}
+{"context":"InstanceLoader","level":"info","message":"TypeOrmModule dependencies initialized","timestamp":"2025-12-05 20:17:42"}
+{"context":"InstanceLoader","level":"info","message":"TypeOrmModule dependencies initialized","timestamp":"2025-12-05 20:17:42"}
+{"context":"InstanceLoader","level":"info","message":"TypeOrmModule dependencies initialized","timestamp":"2025-12-05 20:17:42"}
+{"context":"InstanceLoader","level":"info","message":"TypeOrmModule dependencies initialized","timestamp":"2025-12-05 20:17:42"}
+{"context":"InstanceLoader","level":"info","message":"TypeOrmModule dependencies initialized","timestamp":"2025-12-05 20:17:42"}
+{"context":"InstanceLoader","level":"info","message":"TypeOrmModule dependencies initialized","timestamp":"2025-12-05 20:17:42"}
+{"context":"InstanceLoader","level":"info","message":"UserModule dependencies initialized","timestamp":"2025-12-05 20:17:42"}
+{"context":"InstanceLoader","level":"info","message":"AuthModule dependencies initialized","timestamp":"2025-12-05 20:17:42"}
+{"context":"InstanceLoader","level":"info","message":"PlantsModule dependencies initialized","timestamp":"2025-12-05 20:17:42"}
+{"context":"InstanceLoader","level":"info","message":"SensorReadingsModule dependencies initialized","timestamp":"2025-12-05 20:17:42"}
+{"context":"InstanceLoader","level":"info","message":"UserActionsModule dependencies initialized","timestamp":"2025-12-05 20:17:42"}
+{"context":"InstanceLoader","level":"info","message":"AdviceModule dependencies initialized","timestamp":"2025-12-05 20:17:42"}
+{"context":"RoutesResolver","level":"info","message":"AppController {/api}:","timestamp":"2025-12-05 20:17:42"}
+{"context":"RouterExplorer","level":"info","message":"Mapped {/api, GET} route","timestamp":"2025-12-05 20:17:42"}
+{"context":"RoutesResolver","level":"info","message":"AuthController {/api/auth}:","timestamp":"2025-12-05 20:17:42"}
+{"context":"RouterExplorer","level":"info","message":"Mapped {/api/auth/register, POST} route","timestamp":"2025-12-05 20:17:42"}
+{"context":"RouterExplorer","level":"info","message":"Mapped {/api/auth/login, POST} route","timestamp":"2025-12-05 20:17:42"}
+{"context":"RouterExplorer","level":"info","message":"Mapped {/api/auth/forget-password, POST} route","timestamp":"2025-12-05 20:17:42"}
+{"context":"RouterExplorer","level":"info","message":"Mapped {/api/auth/check-otp, POST} route","timestamp":"2025-12-05 20:17:42"}
+{"context":"RoutesResolver","level":"info","message":"UserController {/api/user}:","timestamp":"2025-12-05 20:17:42"}
+{"context":"RouterExplorer","level":"info","message":"Mapped {/api/user, POST} route","timestamp":"2025-12-05 20:17:42"}
+{"context":"RouterExplorer","level":"info","message":"Mapped {/api/user, GET} route","timestamp":"2025-12-05 20:17:42"}
+{"context":"RouterExplorer","level":"info","message":"Mapped {/api/user/:id, GET} route","timestamp":"2025-12-05 20:17:42"}
+{"context":"RouterExplorer","level":"info","message":"Mapped {/api/user/:id, PATCH} route","timestamp":"2025-12-05 20:17:42"}
+{"context":"RouterExplorer","level":"info","message":"Mapped {/api/user/:id, DELETE} route","timestamp":"2025-12-05 20:17:42"}
+{"context":"RoutesResolver","level":"info","message":"PlantsController {/api/plants}:","timestamp":"2025-12-05 20:17:42"}
+{"context":"RouterExplorer","level":"info","message":"Mapped {/api/plants, POST} route","timestamp":"2025-12-05 20:17:42"}
+{"context":"RouterExplorer","level":"info","message":"Mapped {/api/plants, GET} route","timestamp":"2025-12-05 20:17:42"}
+{"context":"RouterExplorer","level":"info","message":"Mapped {/api/plants/:id, GET} route","timestamp":"2025-12-05 20:17:42"}
+{"context":"RouterExplorer","level":"info","message":"Mapped {/api/plants/:id/statistics, GET} route","timestamp":"2025-12-05 20:17:42"}
+{"context":"RouterExplorer","level":"info","message":"Mapped {/api/plants/:id, PUT} route","timestamp":"2025-12-05 20:17:42"}
+{"context":"RouterExplorer","level":"info","message":"Mapped {/api/plants/:id, DELETE} route","timestamp":"2025-12-05 20:17:42"}
+{"context":"RoutesResolver","level":"info","message":"SensorReadingsController {/api/sensor-readings}:","timestamp":"2025-12-05 20:17:42"}
+{"context":"RouterExplorer","level":"info","message":"Mapped {/api/sensor-readings, POST} route","timestamp":"2025-12-05 20:17:42"}
+{"context":"RouterExplorer","level":"info","message":"Mapped {/api/sensor-readings/plant/:plantId, GET} route","timestamp":"2025-12-05 20:17:42"}
+{"context":"RouterExplorer","level":"info","message":"Mapped {/api/sensor-readings/plant/:plantId/latest, GET} route","timestamp":"2025-12-05 20:17:42"}
+{"context":"RouterExplorer","level":"info","message":"Mapped {/api/sensor-readings/plant/:plantId/daily, GET} route","timestamp":"2025-12-05 20:17:42"}
+{"context":"RoutesResolver","level":"info","message":"AdviceController {/api/advice}:","timestamp":"2025-12-05 20:17:42"}
+{"context":"RouterExplorer","level":"info","message":"Mapped {/api/advice/plant/:plantId, GET} route","timestamp":"2025-12-05 20:17:42"}
+{"context":"RoutesResolver","level":"info","message":"UserActionsController {/api/user-actions}:","timestamp":"2025-12-05 20:17:42"}
+{"context":"RouterExplorer","level":"info","message":"Mapped {/api/user-actions/plant/:plantId, POST} route","timestamp":"2025-12-05 20:17:42"}
+{"context":"RouterExplorer","level":"info","message":"Mapped {/api/user-actions/plant/:plantId, GET} route","timestamp":"2025-12-05 20:17:42"}
+{"context":"RouterExplorer","level":"info","message":"Mapped {/api/user-actions/plant/:plantId/recent, GET} route","timestamp":"2025-12-05 20:17:42"}
+{"context":"RouterExplorer","level":"info","message":"Mapped {/api/user-actions/plant/:plantId/type/:actionType, GET} route","timestamp":"2025-12-05 20:17:42"}
+{"context":"RoutesResolver","level":"info","message":"HealthController {/api/health}:","timestamp":"2025-12-05 20:17:42"}
+{"context":"RouterExplorer","level":"info","message":"Mapped {/api/health, GET} route","timestamp":"2025-12-05 20:17:42"}
+{"context":"NestApplication","level":"info","message":"Nest application successfully started","timestamp":"2025-12-05 20:17:42"}
