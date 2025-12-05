@@ -4,8 +4,8 @@ import { SecuritySchemeObject } from '@nestjs/swagger/dist/interfaces/open-api-s
 
 export function SwaggerConfigInit(app: INestApplication): void {
   const document = new DocumentBuilder()
-    .setTitle('Snappfood API')
-    .setDescription('Snappfood API description')
+    .setTitle('MyFlower API')
+    .setDescription('MyFlower API description')
     .setVersion('0.0.0')
     .addBearerAuth(SwaggerAuthConfig(), 'Authorization')
     .build();

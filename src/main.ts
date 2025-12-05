@@ -20,7 +20,7 @@ async function bootstrap() {
     }),
   );
   // API prefix
-  app.setGlobalPrefix('api');
+  // app.setGlobalPrefix('api');
   SwaggerConfigInit(app);
 
   await app.listen(process.env.PORT ?? 3000, () => {
