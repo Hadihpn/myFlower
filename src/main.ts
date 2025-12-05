@@ -3,6 +3,8 @@ import { AppModule } from './app.module';
 import { Logger, ValidationPipe } from '@nestjs/common';
 import { SwaggerConfigInit } from './config/swagger.config';
 import { WINSTON_MODULE_NEST_PROVIDER } from 'nest-winston';
+import { DataSource } from 'typeorm';
+import { ConfigService } from '@nestjs/config';
 
 async function bootstrap() {
   const app = await NestFactory.create(AppModule, {
@@ -28,7 +30,23 @@ async function bootstrap() {
   // API prefix
   // app.setGlobalPrefix('api');
   SwaggerConfigInit(app);
+// Try to get DataSource injected by Nest/typeorm
+  const dataSource = app.get(DataSource);
+const configService = app.get(ConfigService);
 
+  console.log('📦 Loaded ENV:');
+  console.log('DATABASE_HOST =', configService.get('DATABASE_HOST'));
+  console.log('DATABASE_PORT =', configService.get('DATABASE_PORT'));
+  console.log('DATABASE_PASSWORD =', configService.get('DATABASE_PASSWORD'));
+  console.log('DATABASE_USER =', configService.get('DATABASE_USER'));
+  console.log('DATABASE_NAME =', configService.get('DATABASE_NAME'));
+  console.log('NODE_ENV =', configService.get('NODE_ENV'));
+  try {
+    await dataSource.query('SELECT 1');
+    console.log('✅ Database connected successfully!');
+  } catch (error) {
+    console.error('❌ Database connection failed:', error.message);
+  }
   await app.listen(process.env.PORT ?? 3000, () => {
     console.log(`
     🌱 Plant Maintenance API is running!
