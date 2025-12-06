@@ -53,11 +53,12 @@ export const getDatabaseConfig = (
   // DataSource for migrations
   export const dataSourceOptions: DataSourceOptions = {
     type: 'postgres',
-    host: process.env.DATABASE_HOST || 'localhost',
-    port: +process.env.DATABASE_PORT || 5432,
-    username: process.env.DATABASE_USER || 'postgres',
-    password: process.env.DATABASE_PASSWORD || 'password',
-    database: process.env.DATABASE_NAME || 'plant_maintenance',
+    // host: process.env.DATABASE_HOST || 'localhost',
+    // port: +process.env.DATABASE_PORT || 5432,
+    // username: process.env.DATABASE_USER || 'postgres',
+    // password: process.env.DATABASE_PASSWORD || 'password',
+    // database: process.env.DATABASE_NAME || 'plant_maintenance',
+    url:"postgresql://postgres.ujffaxtgnzpefetdbkrp:[YOUR-PASSWORD]@aws-1-eu-west-1.pooler.supabase.com:5432/postgres",
     entities: [__dirname + '/../**/*.entity{.ts,.js}'],
     migrations: [__dirname + '/../database/migrations/*{.ts,.js}'],
     synchronize: false,
