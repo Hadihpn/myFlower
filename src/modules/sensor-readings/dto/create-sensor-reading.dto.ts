@@ -1,4 +1,4 @@
-import { IsNumber, IsDateString, IsString } from 'class-validator';
+import { IsString, IsNumber, IsDateString, IsOptional } from 'class-validator';
 import { ApiProperty } from '@nestjs/swagger';
 
 export class CreateSensorReadingDto {
@@ -6,7 +6,7 @@ export class CreateSensorReadingDto {
   @IsString()
   deviceId: string;
 
-  @ApiProperty({ example: 22.5 })
+  @ApiProperty({ example: 24.5 })
   @IsNumber()
   temperature: number;
 
@@ -14,11 +14,20 @@ export class CreateSensorReadingDto {
   @IsNumber()
   moisture: number;
 
-  @ApiProperty({ example: 15000.75 })
+  @ApiProperty({ example: 28000 })
   @IsNumber()
   light: number;
 
-  @ApiProperty({ example: '2024-01-15T10:30:00Z' })
+  @ApiProperty({ example: 55.0, required: false })
+  @IsOptional()
+  @IsNumber()
+  humidity?: number;
+
+  @ApiProperty({ example: '2024-11-25T10:00:00Z' })
   @IsDateString()
   timestamp: string;
+
+  @ApiProperty({ example: '1_abc123xyz789_1700000000000', description: 'Device authentication token' })
+  @IsString()
+  token: string;
 }

@@ -8,7 +8,10 @@ import {
 } from 'typeorm';
 import { Exclude } from 'class-transformer';
 import { EntityEnums } from 'src/common/enums/entity-name.enum';
-import { PlantEntity } from 'src/modules/plants/entities/plant.entity';
+import { UserSubscriptionEntity } from 'src/modules/user-subscriptions/entities/user-subscription.entity';
+import { DeviceEntity } from 'src/modules/devices/entities/device.entity';
+import { UserPlantSelectionEntity } from 'src/modules/user-plant-selections/entities/user-plant-selection.entity';
+import { UserActionEntity } from 'src/modules/user-actions/entities/user-action.entity';
 
 @Entity(EntityEnums.User)
 export class UserEntity {
@@ -33,6 +36,16 @@ export class UserEntity {
 
   @UpdateDateColumn()
   updatedAt: Date;
-  @OneToMany(() => PlantEntity, (plant) => plant.user)
-  plants: PlantEntity[];
+  // Relations
+  @OneToMany(() => UserSubscriptionEntity, (subscription) => subscription.user)
+  subscriptions: UserSubscriptionEntity[];
+
+  @OneToMany(() => DeviceEntity, (device) => device.user)
+  devices: DeviceEntity[];
+
+  @OneToMany(() => UserPlantSelectionEntity, (selection) => selection.user)
+  plantSelections: UserPlantSelectionEntity[];
+
+  @OneToMany(() => UserActionEntity, (action) => action.user)
+  actions: UserActionEntity[];
 }

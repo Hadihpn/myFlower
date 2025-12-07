@@ -2,40 +2,56 @@ import {
   Entity,
   PrimaryGeneratedColumn,
   Column,
-  CreateDateColumn,
   ManyToOne,
+  OneToMany,
   JoinColumn,
+  CreateDateColumn,
   Index,
 } from 'typeorm';
-import { PlantEntity } from 'src/modules/plants/entities/plant.entity';
 import { EntityEnums } from 'src/common/enums/entity-name.enum';
+import { DeviceEntity } from 'src/modules/devices/entities/device.entity';
+import { SensorVerificationEntity } from 'src/modules/sensor-verification/entities/sensor-verification.entity';
 
 @Entity(EntityEnums.SensorReadings)
-@Index(['plantId', 'timestamp']) // For efficient querying
+@Index(['deviceId', 'timestamp'])
 export class SensorReadingEntity {
-  @PrimaryGeneratedColumn('increment')
+  @PrimaryGeneratedColumn()
   id: number;
 
-  @Column({ type: 'decimal', precision: 5, scale: 2 })
-  temperature: number; // in Celsius
+  @Column({ name: 'device_id' })
+  deviceId: number;
 
   @Column({ type: 'decimal', precision: 5, scale: 2 })
-  moisture: number; // percentage (0-100)
+  temperature: number;
+
+  @Column({ type: 'decimal', precision: 5, scale: 2 })
+  moisture: number;
 
   @Column({ type: 'decimal', precision: 8, scale: 2 })
-  light: number; // in lux
+  light: number;
+
+  @Column({ type: 'decimal', precision: 5, scale: 2, nullable: true })
+  humidity: number;
 
   @Column({ type: 'timestamp' })
   timestamp: Date;
 
-  @CreateDateColumn()
+  @Column({ default: false })
+  verified: boolean; // True if passed verification
+
+  @Column({ default: false })
+  anomaly: boolean; // True if suspected sensor glitch
+
+  @CreateDateColumn({ name: 'created_at' })
   createdAt: Date;
 
-  @Column()
-  plantId: number;
-  @ManyToOne(() => PlantEntity, (plant) => plant.sensorReadings, {
+  // Relations
+  @ManyToOne(() => DeviceEntity, (device) => device.sensorReadings, {
     onDelete: 'CASCADE',
   })
-  @JoinColumn({ name: 'plantId' })
-  plant: PlantEntity;
+  @JoinColumn({ name: 'device_id' })
+  device: DeviceEntity;
+
+  @OneToMany(() => SensorVerificationEntity, (verification) => verification.triggerReading)
+  verifications: SensorVerificationEntity[];
 }

@@ -6,12 +6,12 @@ import { TypeOrmModule } from '@nestjs/typeorm';
 import { ConfigModule, ConfigService } from '@nestjs/config';
 import { join } from 'path';
 import { AuthModule } from './modules/auth/auth.module';
-import { PlantsModule } from './modules/plants/plants.module';
+// import { PlantsModule } from './modules/plants/plants.module';
 import { UserModule } from './modules/users/user.module';
 import { SensorReadingsModule } from './modules/sensor-readings/sensor-readings.module';
 import { getDatabaseConfig } from './config/db.config';
-import { AdviceModule } from './modules/advice/advice.module';
-import { UserActionsModule } from './modules/user-actions/user-actions.module';
+// import { AdviceModule } from './modules/advice/advice.module';
+// import { UserActionsModule } from './modules/user-actions/user-actions.module';
 import { HealthModule } from './health/health.module';
 import { WinstonModule } from 'nest-winston';
 import { winstonConfig } from './config/logger.config';
@@ -41,10 +41,10 @@ import { LoggingInterceptor } from './common/interceptors/logging.interceptor';
     // FlowerModule,
     AuthModule,
     UserModule,
-    PlantsModule,
+    // PlantsModule,
     SensorReadingsModule,
-    AdviceModule,
-    UserActionsModule,
+    // AdviceModule,
+    // UserActionsModule,
     HealthModule,
   ],
   controllers: [AppController],

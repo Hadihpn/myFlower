@@ -2,21 +2,43 @@ import {
   Entity,
   PrimaryGeneratedColumn,
   Column,
-  CreateDateColumn,
   ManyToOne,
   JoinColumn,
+  CreateDateColumn,
 } from 'typeorm';
-import { PlantEntity } from '../../plants/entities/plant.entity';
+import {  DeviceEntity } from '../../devices/entities/device.entity';
+import { UserPlantSelectionEntity } from '../../user-plant-selections/entities/user-plant-selection.entity';
+import { EntityEnums } from 'src/common/enums/entity-name.enum';
 import { UserEntity } from '../../users/entities/user.entity';
-import { ActionType } from '../enum/user-actions.enum';
-import { EntityEnums } from '../../../common/enums/entity-name.enum';
+import { ActionType } from '../type/actionType.enum';
+
+// export enum ActionType {
+//   WATERED = 'watered',
+//   FERTILIZED = 'fertilized',
+//   PRUNED = 'pruned',
+//   SOIL_CHANGED = 'soil_changed',
+//   RELOCATED = 'relocated',
+//   PESTICIDE_APPLIED = 'pesticide_applied',
+//   HARVESTED = 'harvested',
+//   OTHER = 'other',
+// }
 
 @Entity(EntityEnums.UserActions)
 export class UserActionEntity {
-  @PrimaryGeneratedColumn('increment')
+  @PrimaryGeneratedColumn()
   id: number;
 
+  @Column({ name: 'user_id' })
+  userId: number;
+
+  @Column({ name: 'device_id' })
+  deviceId: number;
+
+  @Column({ name: 'selection_id' })
+  selectionId: number;
+
   @Column({
+    name: 'action_type',
     type: 'enum',
     enum: ActionType,
   })
@@ -25,23 +47,24 @@ export class UserActionEntity {
   @Column({ type: 'text', nullable: true })
   notes: string;
 
-  @Column({ type: 'timestamp' })
+  @Column({ name: 'action_date', type: 'timestamp' })
   actionDate: Date;
 
-  @CreateDateColumn()
+  @CreateDateColumn({ name: 'created_at' })
   createdAt: Date;
 
-  @ManyToOne(() => PlantEntity, { onDelete: 'CASCADE' })
-  @JoinColumn({ name: 'plantId' })
-  plant: PlantEntity;
-
-  @Column()
-  plantId: number;
-
-  @ManyToOne(() => UserEntity, { onDelete: 'CASCADE' })
-  @JoinColumn({ name: 'userId' })
+  // Relations
+  @ManyToOne(() => UserEntity, (user) => user.actions, { onDelete: 'CASCADE' })
+  @JoinColumn({ name: 'user_id' })
   user: UserEntity;
 
-  @Column()
-  userId: number;
+  @ManyToOne(() => DeviceEntity, (device) => device.actions, { onDelete: 'CASCADE' })
+  @JoinColumn({ name: 'device_id' })
+  device: DeviceEntity;
+
+  @ManyToOne(() => UserPlantSelectionEntity, (selection) => selection.actions, {
+    onDelete: 'CASCADE',
+  })
+  @JoinColumn({ name: 'selection_id' })
+  selection: UserPlantSelectionEntity;
 }
